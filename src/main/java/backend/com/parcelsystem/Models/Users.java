@@ -32,13 +32,10 @@ public class Users {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @NotBlank(message = "firstname cannot be blank")
-    @Column(name = "firstname", nullable = false)
-    private String firstname;
+    @NotBlank(message = "email cannot be blank")
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
 
-    @NotBlank(message = "surename cannot be blank")
-    @Column(name = "surename", nullable = false)
-    private String surename;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
@@ -58,12 +55,10 @@ public class Users {
     @Column(name = "zipcode")
     private String zipcode;
 
-    public Users(String username, String password, String firstname, String surename, List<Role> roles, String city, String address, String zipcode) {
+    public Users(String username, String password, String email, String city, String address, String zipcode) {
         this.username = username;
         this.password = password;
-        this.firstname = firstname;
-        this.surename = surename;
-        this.roles = roles;
+        this.email = email;
         this.city = city;
         this.address = address;
         this.zipcode = zipcode;

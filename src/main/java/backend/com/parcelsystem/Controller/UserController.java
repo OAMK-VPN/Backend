@@ -61,5 +61,9 @@ public class UserController {
          UserResponse res = userMapper.mapUserToResponse(userService.updatePassword(passwordForm));
         return new ResponseEntity<UserResponse>(res, HttpStatus.OK);
     }
-   
+    
+    @PutMapping("/forgotPassword")
+    public ResponseEntity<String> forgotPassword(@RequestParam String email) {
+        return new ResponseEntity<String>(userService.forgotPassword(email), HttpStatus.OK);
+    }
 }

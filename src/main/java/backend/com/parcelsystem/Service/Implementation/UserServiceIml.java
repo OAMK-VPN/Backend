@@ -3,12 +3,15 @@ package backend.com.parcelsystem.Service.Implementation;
 
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 // import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -50,6 +53,8 @@ public class UserServiceIml implements UserService, UserDetailsService {
     UserMapper userMapper;
     @Autowired
     HttpServletResponse response;
+    @Autowired
+    JavaMailSender mailSender;
  
     
 
@@ -74,6 +79,17 @@ public class UserServiceIml implements UserService, UserDetailsService {
         Users users = entity.get();
         return users;
     }
+
+    @Override
+    public Users getUserByEmail(String email) {
+         Optional<Users> entity = userRepos.findByEmail(email);
+        if(!entity.isPresent()) {
+         throw new EntityNotFoundException("the username not found");
+        }
+        Users users = entity.get();
+        return users;
+    }
+
     @Override
     public Users getUserById(Long id) {
         Optional<Users> entity = userRepos.findById(id);
@@ -90,7 +106,7 @@ public class UserServiceIml implements UserService, UserDetailsService {
         if(entity.isPresent()) {
          throw new EntityExistingException("the username exists");
         }
-        Users user = new Users(signUp.getUsername(), new BCryptPasswordEncoder().encode(signUp.getPassword()), signUp.getFirstname(), signUp.getSurename(), signUp.getCity(), signUp.getAddress(), signUp.getZipcode());
+        Users user = new Users(signUp.getUsername(), new BCryptPasswordEncoder().encode(signUp.getPassword()), signUp.getEmail(), signUp.getCity(), signUp.getAddress(), signUp.getZipcode());
         user.getRoles().add(Role.USER);
         userRepos.save(user);
 
@@ -161,5 +177,32 @@ public class UserServiceIml implements UserService, UserDetailsService {
     }
 
 
-   
+    @Override
+    public String forgotPassword(String email) {
+        Users user = getUserByEmail(email);
+        String password = generateAutoPassword();
+        user.setPassword(new BCryptPasswordEncoder().encode(password));
+        userRepos.save(user);
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("BookingApp");
+        message.setTo(email);
+        message.setSubject("reset password");
+        message.setText("your new password is " + password + ", please use this password to login and change your password");
+        mailSender.send(message);
+        return "The new password are sent to your email successfully";
+    }
+
+     private String generateAutoPassword() {
+        List<Integer> list = Arrays.asList(0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+        String password = "";
+        int n = 0;
+        while(n < 6) {
+            int randomIndex = (int)(Math.random() * (10));
+            System.out.println(randomIndex);
+            password += list.get(randomIndex);
+            n++;
+        }
+        System.out.println(password);
+        return password;
+    }
 }
