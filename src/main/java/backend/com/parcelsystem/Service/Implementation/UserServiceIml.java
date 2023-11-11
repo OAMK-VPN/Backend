@@ -40,8 +40,6 @@ import backend.com.parcelsystem.Models.Response.UserResponse;
 import backend.com.parcelsystem.Repository.UserRepos;
 import backend.com.parcelsystem.Security.SecurityConstant;
 import backend.com.parcelsystem.Service.UserService;
-
-
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
@@ -82,7 +80,7 @@ public class UserServiceIml implements UserService, UserDetailsService {
 
     @Override
     public Users getUserByEmail(String email) {
-         Optional<Users> entity = userRepos.findByEmail(email);
+        Optional<Users> entity = userRepos.findByEmail(email);
         if(!entity.isPresent()) {
          throw new EntityNotFoundException("the username not found");
         }
@@ -106,7 +104,7 @@ public class UserServiceIml implements UserService, UserDetailsService {
         if(entity.isPresent()) {
          throw new EntityExistingException("the username exists");
         }
-        Users user = new Users(signUp.getUsername(), new BCryptPasswordEncoder().encode(signUp.getPassword()), signUp.getEmail(), signUp.getCity(), signUp.getAddress(), signUp.getZipcode());
+        Users user = new Users(signUp.getUsername(), new BCryptPasswordEncoder().encode(signUp.getPassword()), signUp.getFullname(), signUp.getEmail(), signUp.getCity(), signUp.getAddress(), signUp.getZipcode());
         user.getRoles().add(Role.USER);
         userRepos.save(user);
 
@@ -135,6 +133,9 @@ public class UserServiceIml implements UserService, UserDetailsService {
            throw new EntityNotFoundException("the username not found");
         }
         Users user = entity.get();
+        if(user.isActive() == false) {
+            throw new BadResultException("the account was deleted");
+        }
         if(!new BCryptPasswordEncoder().matches(userSignIn.getPassword(), user.getPassword())) {
             throw new EntityNotFoundException("the password is wrong");
         }
@@ -180,6 +181,7 @@ public class UserServiceIml implements UserService, UserDetailsService {
     @Override
     public String forgotPassword(String email) {
         Users user = getUserByEmail(email);
+        
         String password = generateAutoPassword();
         user.setPassword(new BCryptPasswordEncoder().encode(password));
         userRepos.save(user);

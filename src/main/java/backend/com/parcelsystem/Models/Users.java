@@ -36,6 +36,10 @@ public class Users {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @NotBlank(message = "fullname cannot be blank")
+    @Column(name = "fullname", nullable = false, unique = true)
+    private String fullname;
+
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
@@ -55,13 +59,30 @@ public class Users {
     @Column(name = "zipcode")
     private String zipcode;
 
-    public Users(String username, String password, String email, String city, String address, String zipcode) {
+    @Column(name = "active")
+    private boolean active;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Driver driver;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Receiver receiver;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Sender sender;
+
+    public Users(String username, String password, String fullname, String email, String city, String address, String zipcode) {
         this.username = username;
         this.password = password;
+        this.fullname = fullname;
         this.email = email;
         this.city = city;
         this.address = address;
         this.zipcode = zipcode;
+        this.active = true;
     }
 
     
