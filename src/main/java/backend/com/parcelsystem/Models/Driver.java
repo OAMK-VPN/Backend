@@ -31,4 +31,10 @@ public class Driver {
     @JsonIgnore
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Notification> notifications = new ArrayList<>();
+
+    public Driver(Users user) {
+        this.user = user;
+    }
+
+    
 }

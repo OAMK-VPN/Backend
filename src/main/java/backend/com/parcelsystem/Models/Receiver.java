@@ -30,4 +30,10 @@ public class Receiver {
     @JsonIgnore
     @OneToMany(mappedBy = "receiver", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Notification> notifications = new ArrayList<>();
+
+    public Receiver(Users user) {
+        this.user = user;
+    }
+
+        
 }

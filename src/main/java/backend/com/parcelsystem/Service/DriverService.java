@@ -1,0 +1,8 @@
+package backend.com.parcelsystem.Service;
+
+import backend.com.parcelsystem.Models.Driver;
+
+public interface DriverService {
+    Driver getById(Long id);
+    Driver getByAuthenticatedUser();
+}

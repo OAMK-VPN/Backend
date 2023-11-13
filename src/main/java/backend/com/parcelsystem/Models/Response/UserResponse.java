@@ -21,32 +21,13 @@ import lombok.Setter;
 public class UserResponse {
     private Long id;
     private String username;
-    private String firstname;
-    private String surename;
+    private String email;
+    private String fullname;
     private List<Role> roles;
-    private double longitude;
-    private double latitude;
-    private String imageurl;
-    // private Long customer;
-    // private Long owner;
-    // private Long courier;
-    // public UserResponse(Long id, String username, String firstname, String surename, List<Role> roles, double longitude,
-    //         double latitude, String imageurl) {
-    //     this.id = id;
-    //     this.username = username;
-    //     this.firstname = firstname;
-    //     this.surename = surename;
-    //     this.roles = roles;
-    //     this.longitude = longitude;
-    //     this.latitude = latitude;
-    //     this.imageurl = imageurl;
-    // }
-    // @Override
-    // public String toString() {
-    //     return "UserResponse [id=" + id + ", username=" + username + ", firstname=" + firstname + ", surename="
-    //             + surename + ", roles=" + roles + ", longitude=" + longitude + ", latitude=" + latitude + ", imageurl="
-    //             + imageurl + ", customer=" + customer + ", owner=" + owner + ", courier=" + courier + "]";
-    // }
+    private String city;
+    private String address;
+    private String zipcode;
+    private boolean active;
     
  
 }
