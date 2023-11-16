@@ -40,25 +40,21 @@ public class CabinetController {
         }
     }
 
-    // @PutMapping("/{id}/updateEmptyStatus")
-    // public ResponseEntity<Cabinet> updateEmptyStatus(@PathVariable Long id) {
-    //     Cabinet updatedCabinet = cabinetService.updateEmptyStatus(id);
+    @PutMapping("/{id}/updateEmptyStatus")
+    public ResponseEntity<Cabinet> updateEmptyStatus(@PathVariable Long id) {
+        Cabinet updatedCabinet = cabinetService.updateEmptyStatus(id);
 
-    //     if (updatedCabinet != null) {
-    //         return new ResponseEntity<>(updatedCabinet, HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    // }
+        if (updatedCabinet != null) {
+            return new ResponseEntity<>(updatedCabinet, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 
-    // @PutMapping("/{id}/updateCode")
-    // public ResponseEntity<Cabinet> updateCode(@PathVariable Long id, @RequestParam String code) {
-    //     Cabinet updatedCabinet = cabinetService.checkAndUpdateCode(id, code);
-
-    //     if (updatedCabinet != null) {
-    //         return new ResponseEntity<>(updatedCabinet, HttpStatus.OK);
-    //     } else {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-    // }
+    @PutMapping("/{id}/updateCode")
+    public ResponseEntity<Cabinet> updateCode(@PathVariable Long id, @RequestParam String code) {
+        Cabinet updatedCabinet = cabinetService.checkAndUpdateCode(id, code);
+        return new ResponseEntity<>(updatedCabinet, HttpStatus.OK);
+        
+    }
 }

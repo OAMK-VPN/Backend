@@ -5,6 +5,7 @@ import java.util.Random;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import backend.com.parcelsystem.Exception.EntityNotFoundException;
 import backend.com.parcelsystem.Models.Code;
 import backend.com.parcelsystem.Repository.CodeRepos;
 import backend.com.parcelsystem.Service.CodeService;
@@ -23,7 +24,11 @@ public class CodeServiceIml implements CodeService {
 
     @Override
     public Code getCodeById(Long id) {
-        return codeRepository.findById(id).orElse(null);
+        Code code = codeRepository.findById(id).orElse(null);
+        if(code == null) {
+            throw new EntityNotFoundException("code not found");
+        }
+        return code;
     }
 
     @Override

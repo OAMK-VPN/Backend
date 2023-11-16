@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import backend.com.parcelsystem.Exception.BadResultException;
 import backend.com.parcelsystem.Exception.EntityNotFoundException;
 import backend.com.parcelsystem.Models.Cabinet;
 import backend.com.parcelsystem.Models.Code;
@@ -38,16 +39,19 @@ public class CabinetServiceIml implements CabinetService {
     @Override
     public Cabinet checkAndUpdateCode(Long id, String code) {
         Cabinet cabinet = cabinetRepository.findById(id).orElse(null);
-
+        System.out.println(cabinet);
         if (cabinet != null) {
             Code existingCode = codeService.getCodeByCabinet(id);
 
             // Check if the new code already exists or not
-            if (existingCode == null || !codeService.checkCodeExist(code)) {
+            if (codeService.checkCodeExist(code)) {
                 // If not, update the code
-                existingCode.setCode(code);
+                String newCode = codeService.generateRandomCode();
+                existingCode.setCode(newCode);
                 codeService.updateCode(existingCode);
                 return cabinet;
+            } else {
+                throw new BadResultException("code is not correct");
             }
         }
         return null;
