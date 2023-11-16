@@ -1,0 +1,156 @@
+[
+    {
+      "name": "Postnord Automaatti K-supermarket Pekuri",
+      "address": "Kauppurienkatu 10",
+      "zipcode": "90100",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord R-kioski Oulu Keskusta Isokatu",
+      "address": "Isokatu 61",
+      "zipcode": "90100",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord K-market Torinranta",
+      "address": "Saaristonkatu 2",
+      "zipcode": "90100",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Lähiboksi Mannenkatu 2",
+      "address": "Mannenkatu 2",
+      "zipcode": "90130",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Automaatti Sale Puistolinna",
+      "address": "Isokatu 87",
+      "zipcode": "90120",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Automaatti Prisma Raksila Oulu",
+      "address": "Tehtaankatu 3",
+      "zipcode": "90130",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Lähiboksi Sale Raksila",
+      "address": "Tehtaankatu 1",
+      "zipcode": "90130",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord K-citymarket Oulu Raksila",
+      "address": "Tehtaankatu 5",
+      "zipcode": "90130",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord K-market Valjaspuisto",
+      "address": "Limingantie 8",
+      "zipcode": "90400",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Automaatti Sale Etelätulli Oulu",
+      "address": "Ilmarinkatu 16",
+      "zipcode": "90400",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Lähiboksi Sale Intiö",
+      "address": "Kenttätie 9",
+      "zipcode": "90130",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Automaatti Sale Intiö Oulu",
+      "address": "Kenttätie 9",
+      "zipcode": "90130",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord K-market Tuira",
+      "address": "Valtatie 61",
+      "zipcode": "90500",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord K-supermarket Joutsensilta",
+      "address": "Paljetie 4",
+      "zipcode": "90150",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Automaatti S-market Tuira",
+      "address": "Valtatie 28",
+      "zipcode": "90500",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Lähiboksi Sale Höyhtyä",
+      "address": "Latokartanontie 1",
+      "zipcode": "90150",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Automaatti Prisma Limingantulli Oulu",
+      "address": "Nuottasaarentie 1",
+      "zipcode": "90130",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Automaatti Kärkkäinen Oulu",
+      "address": "Alasintie 12",
+      "zipcode": "90400",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Lähiboksi Prisma Limingantulli",
+      "address": "Nuottasaarentie 1",
+      "zipcode": "90400",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Automaatti K-market Värttö",
+      "address": "Kurkelantie 2B",
+      "zipcode": "90230",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord K-market Värttö",
+      "address": "Kurkelantie 2",
+      "zipcode": "90230",
+      "city": "OULU",
+      "totalCabinets": 20
+    },
+    {
+      "name": "Postnord Lähiboksi Kitimenpolku 21",
+      "address": "Kitimenpolku 21",
+      "zipcode": "90500",
+      "city": "OULU",
+      "totalCabinets": 20
+    }
+] 

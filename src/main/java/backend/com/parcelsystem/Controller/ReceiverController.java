@@ -21,13 +21,13 @@ public class ReceiverController {
     ReceiverMapper receiverMapper;
 
 
-    // get receiver by id
+    // get receiver by id (add bearer token to request)
     @GetMapping("/receiver/id/{id}")
     public ResponseEntity<ReceiverResponse> getById(@PathVariable Long id) {
         ReceiverResponse res = receiverMapper.mapReceiverToResponse(receiverService.getById(id));
         return new ResponseEntity<ReceiverResponse>(res, HttpStatus.OK);
     }
-     // get receiver by authenticated user or if the receiver is not existent, the method will automatically create new receiver account for the current authenticated user
+     // get receiver by authenticated user or if the receiver is not existent, the method will automatically create new receiver account for the current authenticated user (add bearer token to request)
     @GetMapping("/receiver/authenticated")
     public ResponseEntity<ReceiverResponse> getByAuthUser() {
         ReceiverResponse res = receiverMapper.mapReceiverToResponse(receiverService.getByAuthenticatedUser());

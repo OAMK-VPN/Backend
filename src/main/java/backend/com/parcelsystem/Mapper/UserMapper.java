@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.ModelMap;
 
 import backend.com.parcelsystem.Models.Users;
+import backend.com.parcelsystem.Models.Response.AuthResponse;
 import backend.com.parcelsystem.Models.Response.UserResponse;
 
 @Component
@@ -19,6 +20,11 @@ public class UserMapper {
 
     public UserResponse mapUserToResponse(Users user) {
       UserResponse res = modelMapper.map(user, UserResponse.class);
+      return res;
+    }
+
+    public AuthResponse mapUserToAuthReponse(Users user) {
+      AuthResponse res = modelMapper.map(user, AuthResponse.class);
       return res;
     }
 }

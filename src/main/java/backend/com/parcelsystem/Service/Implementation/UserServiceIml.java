@@ -36,6 +36,7 @@ import backend.com.parcelsystem.Models.Enums.Role;
 import backend.com.parcelsystem.Models.Request.PasswordForm;
 import backend.com.parcelsystem.Models.Request.UserSignIn;
 import backend.com.parcelsystem.Models.Request.UserSignUp;
+import backend.com.parcelsystem.Models.Response.AuthResponse;
 import backend.com.parcelsystem.Models.Response.UserResponse;
 import backend.com.parcelsystem.Repository.UserRepos;
 import backend.com.parcelsystem.Security.SecurityConstant;
@@ -99,7 +100,7 @@ public class UserServiceIml implements UserService, UserDetailsService {
     }
 
     @Override
-    public UserResponse saveUser(UserSignUp signUp) {
+    public AuthResponse saveUser(UserSignUp signUp) {
         Optional<Users> entity = userRepos.findByUsername(signUp.getUsername());
         if(entity.isPresent()) {
          throw new EntityExistingException("the username exists");
@@ -118,15 +119,13 @@ public class UserServiceIml implements UserService, UserDetailsService {
       
         response.setStatus(HttpServletResponse.SC_OK); 
         response.setHeader("Authorization", SecurityConstant.authorization + token);
-
-        return userMapper.mapUserToResponse(user);
-
-        
-    
+        AuthResponse res = userMapper.mapUserToAuthReponse(user);
+        res.setToken(token);
+        return res;
     }
 
     @Override
-    public UserResponse signIn(UserSignIn userSignIn) {
+    public AuthResponse signIn(UserSignIn userSignIn) {
        
         Optional<Users> entity = userRepos.findByUsername(userSignIn.getUsername());
         if(!entity.isPresent()) {
@@ -149,7 +148,8 @@ public class UserServiceIml implements UserService, UserDetailsService {
       
         response.setStatus(HttpServletResponse.SC_OK); 
         response.setHeader("Authorization", SecurityConstant.authorization + token);
-        UserResponse res = userMapper.mapUserToResponse(user);
+        AuthResponse res = userMapper.mapUserToAuthReponse(user);
+        res.setToken(token);
         System.out.println(res);
         return res;
     

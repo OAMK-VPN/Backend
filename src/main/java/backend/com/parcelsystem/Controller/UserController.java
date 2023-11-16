@@ -17,6 +17,7 @@ import backend.com.parcelsystem.Models.Users;
 import backend.com.parcelsystem.Models.Request.PasswordForm;
 import backend.com.parcelsystem.Models.Request.UserSignIn;
 import backend.com.parcelsystem.Models.Request.UserSignUp;
+import backend.com.parcelsystem.Models.Response.AuthResponse;
 import backend.com.parcelsystem.Models.Response.UserResponse;
 import backend.com.parcelsystem.Service.UserService;
 import jakarta.validation.Valid;
@@ -40,8 +41,8 @@ public class UserController {
         return new ResponseEntity<UserResponse>(res, HttpStatus.OK);
     }
     @PutMapping("/signIn")
-    public ResponseEntity<UserResponse> signIn(@Valid @RequestBody UserSignIn userSignIn) {
-        return new ResponseEntity<UserResponse>(userService.signIn(userSignIn), HttpStatus.OK);
+    public ResponseEntity<AuthResponse> signIn(@Valid @RequestBody UserSignIn userSignIn) {
+        return new ResponseEntity<AuthResponse>(userService.signIn(userSignIn), HttpStatus.OK);
     }
     //requires token
     @GetMapping("/authUser/getAuthUser")
@@ -51,8 +52,8 @@ public class UserController {
     }
     
     @PostMapping("/signup")
-    public ResponseEntity<UserResponse> register(@Valid @RequestBody UserSignUp userSignup) {
-        return new ResponseEntity<UserResponse>(userService.saveUser(userSignup), HttpStatus.CREATED);
+    public ResponseEntity<AuthResponse> register(@Valid @RequestBody UserSignUp userSignup) {
+        return new ResponseEntity<AuthResponse>(userService.saveUser(userSignup), HttpStatus.CREATED);
     }
 
     //requires token
