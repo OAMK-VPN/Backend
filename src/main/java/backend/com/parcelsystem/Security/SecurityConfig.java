@@ -53,6 +53,7 @@ public class SecurityConfig {
         .requestMatchers("/api/users/signup").permitAll()
         .requestMatchers("/api/lockers/**").permitAll()
         .requestMatchers("/api/cabinets/**").permitAll()
+        .requestMatchers("/api/users/forgotPassword").permitAll()
         .anyRequest().authenticated()
         .and()
         .addFilterBefore(exceptionFilter, authenticationFilter.getClass())
