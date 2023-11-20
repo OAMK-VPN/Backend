@@ -44,4 +44,7 @@ public class Locker {
     @JsonIgnore
     @OneToMany(mappedBy = "locker", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Cabinet> cabinets = new ArrayList<>();
+
+    @OneToMany(mappedBy = "locker", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Code> codes = new ArrayList<>();
 }
