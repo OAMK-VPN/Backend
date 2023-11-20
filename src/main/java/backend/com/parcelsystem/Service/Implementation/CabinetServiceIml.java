@@ -46,7 +46,7 @@ public class CabinetServiceIml implements CabinetService {
             // Check if the new code already exists or not
             if (codeService.checkCodeExist(code)) {
                 // If not, update the code
-                String newCode = codeService.generateRandomCode();
+                String newCode = codeService.generateRandomCode(cabinet.getLocker().getId());
                 existingCode.setCode(newCode);
                 codeService.updateCode(existingCode);
                 return cabinet;

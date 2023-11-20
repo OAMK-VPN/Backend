@@ -7,5 +7,5 @@ public interface CodeService {
     Code getCodeById(Long id);
     Code getCodeByCabinet(Long cabinetID);
     Code updateCode(Code code);
-    String generateRandomCode();
+    String generateRandomCode(Long lockerId);
 } 

@@ -59,17 +59,14 @@ public class DataLoader implements CommandLineRunner {
                 cabinet.setWidth(generateRandomWidth());
                 cabinet.setLocker(parcelLocker);
                 cabinet.setEmpty(true);
-
-               
                 
                 // Save cabinet
                 cabinetRepos.save(cabinet);
                 cabinets.add(cabinet);
 
-
                 // Generate and save random code for the cabinet
                 Code code = new Code();
-                code.setCode(codeService.generateRandomCode());
+                code.setCode(codeService.generateRandomCode(cabinet.getLocker().getId()));
                 code.setCabinet(cabinet);
                 codeRepos.save(code);
 
