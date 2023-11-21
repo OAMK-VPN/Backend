@@ -23,7 +23,7 @@ public class Driver {
     private Long id;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "driver_id"))
+    @CollectionTable(name = "driver_roles", joinColumns = @JoinColumn(name = "driver_id", nullable = true))
     @Enumerated(EnumType.STRING)
     @Column(name = "roles")
     private List<Role> roles = new ArrayList<>();
