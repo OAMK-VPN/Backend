@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import backend.com.parcelsystem.Mapper.DriverMapper;
 import backend.com.parcelsystem.Models.Request.DriverSignIn;
 import backend.com.parcelsystem.Models.Request.DriverSignUp;
@@ -19,7 +20,7 @@ import backend.com.parcelsystem.Service.DriverService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/drivers")
+@RequestMapping("/api/driver")
 public class DriverController {
     @Autowired
     DriverMapper driverMapper;
@@ -37,7 +38,7 @@ public class DriverController {
         return new ResponseEntity<DriverResponse>(res, HttpStatus.OK);
     }
     
-    @PostMapping("/signup")
+    @PostMapping("/signUp")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody DriverSignUp driverSignup) {
         return new ResponseEntity<AuthResponse>(driverService.saveDriver(driverSignup), HttpStatus.CREATED);
     }

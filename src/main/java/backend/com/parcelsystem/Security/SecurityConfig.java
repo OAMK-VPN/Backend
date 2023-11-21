@@ -53,6 +53,8 @@ public class SecurityConfig {
         .requestMatchers("/api/users/signup").permitAll()
         .requestMatchers("/api/lockers/**").permitAll()
         .requestMatchers("/api/cabinets/**").permitAll()
+        .requestMatchers("/api/driver/signIn").permitAll()
+        .requestMatchers("/api/driver/signUp").permitAll()
         .anyRequest().authenticated()
         .and()
         .addFilterBefore(exceptionFilter, authenticationFilter.getClass())

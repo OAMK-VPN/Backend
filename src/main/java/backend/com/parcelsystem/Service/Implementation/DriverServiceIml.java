@@ -66,7 +66,8 @@ import backend.com.parcelsystem.Repository.UserRepos;
 import backend.com.parcelsystem.Security.SecurityConstant;
 import jakarta.servlet.http.HttpServletResponse;
 
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 @Service
@@ -79,7 +80,7 @@ public class DriverServiceIml implements DriverService, UserDetailsService {
     HttpServletResponse response;
     @Autowired
     JavaMailSender mailSender;
-
+    private  Logger log = LoggerFactory.getLogger(this.getClass());
         /* @Override
     public Driver getByAuthenticatedUser() {
         Users authUser = userService.getAuthUser();
@@ -112,6 +113,10 @@ public class DriverServiceIml implements DriverService, UserDetailsService {
     @Override
     public AuthResponse saveDriver(DriverSignUp signUp) {
         Optional<Driver> entity = driverRepos.findByUserName(signUp.getUsername());
+
+        log.debug(signUp.getUsername());
+        System.out.println(entity);
+
         if(entity.isPresent()) {
          throw new EntityExistingException("the username already exists");
         }

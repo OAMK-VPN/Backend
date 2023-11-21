@@ -9,9 +9,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import backend.com.parcelsystem.Models.Driver;
 import backend.com.parcelsystem.Models.Users;
 import backend.com.parcelsystem.Repository.UserRepos;
 import backend.com.parcelsystem.Utils.SampleGenerator;
+import backend.com.parcelsystem.Utils.DriverGenerator;
+import backend.com.parcelsystem.Repository.DriverRepos;
 
 @SpringBootApplication
 public class ParcelsystemApplication {
@@ -21,12 +24,12 @@ public class ParcelsystemApplication {
 	}
 
 		@Bean
-	CommandLineRunner commandLineRunner(UserRepos userRepos, SampleGenerator sampleGenerator) {
+	CommandLineRunner commandLineRunner(UserRepos userRepos, SampleGenerator sampleGenerator, DriverGenerator driverGenerator,DriverRepos driverRepos) {
 		return args -> {
 			
 			
 			Users quan = sampleGenerator.generateUser("quan", "quan doan", "quan@gmail.com", "oulu", "yliopistokatu 2", "90570");
-
+			Driver driver = driverGenerator.generateUser("wang", "wang@gmail.com");
 			
 
 
