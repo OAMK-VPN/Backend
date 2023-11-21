@@ -35,7 +35,7 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Read JSON data from file
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Locker> parcelLockers = objectMapper.readValue(new File("C:\\Users\\Quan Doan\\Desktop\\AdvancedWebProject\\parcelsystem\\src\\main\\java\\backend\\com\\parcelsystem\\Utils\\PostNordLocation.json"),
+        List<Locker> parcelLockers = objectMapper.readValue(new File("src/main/java/backend/com/parcelsystem/Utils/PostNordLocation.json"),
                 objectMapper.getTypeFactory().constructCollectionType(List.class, Locker.class));
 
         // Save data to the database
