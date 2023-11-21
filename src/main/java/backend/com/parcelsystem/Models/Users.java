@@ -62,9 +62,11 @@ public class Users {
     @Column(name = "active")
     private boolean active;
 
+//     We have one driver. All different users' parcels are delivered by this driver. So, we don't need the below code snippet.
+/* 
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Driver driver;
+    private Driver driver; */
 
     @JsonIgnore
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

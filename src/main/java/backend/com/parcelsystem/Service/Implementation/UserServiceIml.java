@@ -9,6 +9,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -43,6 +45,7 @@ import backend.com.parcelsystem.Security.SecurityConstant;
 import backend.com.parcelsystem.Service.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 
+@Primary
 @Service
 public class UserServiceIml implements UserService, UserDetailsService {
     
