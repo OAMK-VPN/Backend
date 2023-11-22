@@ -122,6 +122,7 @@ public class DriverServiceIml implements DriverService, UserDetailsService {
         }
         Driver driver = new Driver(signUp.getUsername(), new BCryptPasswordEncoder().encode(signUp.getPassword()), signUp.getEmail());
         driver.getRoles().add(Role.DRIVER);
+        driver.setActive(true);
         driverRepos.save(driver);
 
         List<String> claims = driver.getRoles().stream().map(auth -> auth.getName()).collect(Collectors.toList());
