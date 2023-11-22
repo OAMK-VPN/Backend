@@ -28,8 +28,9 @@ public class ParcelsystemApplication {
 		return args -> {
 			
 			
-			Users quan = sampleGenerator.generateUser("quan", "quan doan", "quan@gmail.com", "oulu", "yliopistokatu 2", "90570");
 			Driver driver = driverGenerator.generateUser("wang", "wang@gmail.com");
+			Users quan = sampleGenerator.generateUser("quan", "quan@gmail.com", "quan doan", "oulu", "yliopistokatu 2", "90570");
+
 			
 
 

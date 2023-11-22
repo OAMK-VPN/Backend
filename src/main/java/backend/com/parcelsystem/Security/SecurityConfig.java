@@ -55,6 +55,7 @@ public class SecurityConfig {
         .requestMatchers("/api/cabinets/**").permitAll()
         .requestMatchers("/api/driver/signIn").permitAll()
         .requestMatchers("/api/driver/signUp").permitAll()
+        .requestMatchers("/api/users/forgotPassword").permitAll()
         .anyRequest().authenticated()
         .and()
         .addFilterBefore(exceptionFilter, authenticationFilter.getClass())
