@@ -44,4 +44,17 @@ public class ReceiverServiceIml implements ReceiverService {
             return receiver;
         }
     }
+
+    @Override
+    public Receiver getByReceiverEmail(String email) {
+        Users user = userService.getUserByEmail(email);
+        Optional<Receiver> entity = receiverRepos.findByUser(user);
+        if (!entity.isPresent()) {
+            Receiver receiver = new Receiver(user);
+            return receiverRepos.save(receiver);
+        } else {
+            Receiver receiver = entity.get();
+            return receiver;
+        }
+    }
 }

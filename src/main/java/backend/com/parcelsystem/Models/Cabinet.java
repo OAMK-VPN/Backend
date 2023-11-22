@@ -41,14 +41,25 @@ public class Cabinet {
     @JoinColumn(name = "locker_id", referencedColumnName = "id")
     private Locker locker;
 
-    @JsonIgnore
+    
     @OneToOne(mappedBy = "cabinet", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Code code;
 
     @Column(name = "empty", nullable = false)
     private boolean empty;
 
+    @Column(name = "filled", nullable = false)
+    private boolean filled;
+
     @JsonIgnore
     @OneToMany(mappedBy = "cabinet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Parcel> parcels = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Cabinet [id=" + id + ", num=" + num + ", weigh=" + weigh + ", heigh=" + heigh + ", width=" + width
+                + ", locker=" + locker + ", code=" + code + ", empty=" + empty + ", filled=" + filled + "]";
+    }
+
+    
 }

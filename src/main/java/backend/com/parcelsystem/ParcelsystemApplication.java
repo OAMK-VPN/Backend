@@ -25,7 +25,14 @@ public class ParcelsystemApplication {
 		return args -> {
 			
 			
-			Users quan = sampleGenerator.generateUser("quan", "quan doan", "quan@gmail.com", "oulu", "yliopistokatu 2", "90570");
+			Users quan = sampleGenerator.generateUser("quan", "quan@gmail.com", "Quan Doan", "OULU", "yliopistokatu 2", "90570");
+
+
+			Users Peter = sampleGenerator.generateUser("peter", "peter@gmail.com", "Peter senull00", "OULU", "Tehtaankatu 3", "90130");
+
+			Users hang = sampleGenerator.generateUser("hang", "hang@gmail.com", "hang", "HELSINKI", "Malminkaari 19", "00700");
+
+			Users kwang = sampleGenerator.generateUser("kwang", "kwang@gmail.com", "kwang", "HELSINKI", "kalteentie 2", "00770");
 
 			
 

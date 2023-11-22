@@ -6,7 +6,11 @@ import backend.com.parcelsystem.Models.Cabinet;
 
 public interface CabinetService {
     List<Cabinet> getAllByLocker(Long lockerID);
+    List<Cabinet> getEmptyCabinetsByCity(String city);
+    List<Cabinet> getEmptyCabinets();
     Cabinet getByID(Long id);
-    Cabinet updateEmptyStatus(Long id);
-    Cabinet checkAndUpdateCode(Long id, String code);
+    Cabinet checkAndUpdateCodeByLockerAndCode(Long lockerId, String code);
+    Cabinet updateEmptyStatus(Cabinet cabinet);
+    Cabinet updateFilledStatus(Cabinet cabinet);
+    Cabinet updateCabinetAfterBeingPickedupOrderDropOff(Cabinet cabinet, boolean isEmpty, boolean isFilled);
 } 

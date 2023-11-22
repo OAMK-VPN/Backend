@@ -1,5 +1,8 @@
 package backend.com.parcelsystem.Controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import backend.com.parcelsystem.Mapper.DriverMapper;
+import backend.com.parcelsystem.Models.Driver;
 import backend.com.parcelsystem.Models.Response.DriverResponse;
 import backend.com.parcelsystem.Service.DriverService;
 
@@ -32,5 +36,13 @@ public class DriverController {
     public ResponseEntity<DriverResponse> getByAuthUser() {
         DriverResponse res = driverMapper.mapDriverToResponse(driverService.getByAuthenticatedUser());
         return new ResponseEntity<DriverResponse>(res, HttpStatus.OK);
+    }
+
+    // get driver by city (add bearer token to request)
+    @GetMapping("/city/{city}")
+    public ResponseEntity<List<DriverResponse>> getByCity(@PathVariable String city) {
+        List<Driver> drivers = driverService.getDriversByCity(city);
+        List<DriverResponse> res = drivers.stream().map(driver ->  driverMapper.mapDriverToResponse(driver)).collect(Collectors.toList());
+        return new ResponseEntity<List<DriverResponse>>(res, HttpStatus.OK);
     }
 }

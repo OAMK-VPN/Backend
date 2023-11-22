@@ -6,9 +6,11 @@ import org.springframework.stereotype.Component;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import backend.com.parcelsystem.Models.Cabinet;
+import backend.com.parcelsystem.Models.City;
 import backend.com.parcelsystem.Models.Code;
 import backend.com.parcelsystem.Models.Locker;
 import backend.com.parcelsystem.Repository.CabinetRepos;
+import backend.com.parcelsystem.Repository.CityRepos;
 import backend.com.parcelsystem.Repository.CodeRepos;
 import backend.com.parcelsystem.Repository.LockerRepos;
 import backend.com.parcelsystem.Service.CodeService;
@@ -29,6 +31,8 @@ public class DataLoader implements CommandLineRunner {
     CodeRepos codeRepos;
     @Autowired
     CabinetRepos cabinetRepos;
+    @Autowired
+    CityRepos cityRepos;
     
     
     @Override
@@ -40,7 +44,8 @@ public class DataLoader implements CommandLineRunner {
 
         // Save data to the database
         parcelLockerRepository.saveAll(parcelLockers);
-        generateAndSaveRandomCabinets();
+        generateAndSaveRandomCabinets(); 
+    
     }
 
     
@@ -49,6 +54,11 @@ public class DataLoader implements CommandLineRunner {
         List<Locker> parcelLockers = parcelLockerRepository.findAll();
 
         for (Locker parcelLocker : parcelLockers) {
+            // add city to the database
+            if(!cityRepos.existsByName(parcelLocker.getCity())) {
+                cityRepos.save(new City(parcelLocker.getCity()));
+            }
+
             List<Cabinet> cabinets = new ArrayList<>();
 
             for (int i = 1; i <= 20; i++) {
@@ -59,6 +69,7 @@ public class DataLoader implements CommandLineRunner {
                 cabinet.setWidth(generateRandomWidth());
                 cabinet.setLocker(parcelLocker);
                 cabinet.setEmpty(true);
+                cabinet.setFilled(false);
                 
                 // Save cabinet
                 cabinetRepos.save(cabinet);
@@ -67,6 +78,7 @@ public class DataLoader implements CommandLineRunner {
                 // Generate and save random code for the cabinet
                 Code code = new Code();
                 code.setCode(codeService.generateRandomCode(cabinet.getLocker().getId()));
+                code.setLocker(parcelLocker);
                 code.setCabinet(cabinet);
                 codeRepos.save(code);
 

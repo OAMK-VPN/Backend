@@ -22,6 +22,7 @@ public class Code {
     @Column(name = "code", nullable = false)
     private String code;
 
+    @JsonIgnore
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
     @JoinColumn(name = "cabinet_id", referencedColumnName = "id")
     private Cabinet cabinet;
@@ -29,4 +30,11 @@ public class Code {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "locker_id", referencedColumnName = "id")
     private Locker locker;
+
+    @Override
+    public String toString() {
+        return "Code [id=" + id + ", code=" + code + ", locker=" + locker + "]";
+    }
+
+    
 }

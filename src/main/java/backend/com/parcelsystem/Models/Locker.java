@@ -45,6 +45,16 @@ public class Locker {
     @OneToMany(mappedBy = "locker", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Cabinet> cabinets = new ArrayList<>();
 
+
+    @JsonIgnore
     @OneToMany(mappedBy = "locker", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Code> codes = new ArrayList<>();
+
+    @Override
+    public String toString() {
+        return "Locker [id=" + id + ", name=" + name + ", totalCabinets=" + totalCabinets + ", city=" + city
+                + ", address=" + address + ", zipcode=" + zipcode + "]";
+    }
+
+    
 }

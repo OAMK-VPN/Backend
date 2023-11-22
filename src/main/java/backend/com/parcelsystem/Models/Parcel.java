@@ -26,9 +26,26 @@ public class Parcel {
     @Column(name = "id", updatable = false)
     private Long id;
 
+    @NotBlank(message = "name cannot be blank")
+    @Column(name = "tracking_number", nullable = false, unique = true)
+    private String trackingNumber;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false)
     private ParcelStatus status;
+
+    @NotBlank(message = "city cannot be blank")
+    @Column(name = "city")
+    private String city;
+
+    @NotBlank(message = "address cannot be blank")
+    @Column(name = "address")
+    private String address;
+
+    @NotBlank(message = "zipcode cannot be blank")
+    @Column(name = "zipcode")
+    private String zipcode;
+
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "receiver_id", referencedColumnName = "id")
@@ -59,24 +76,67 @@ public class Parcel {
     private double width;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    @Column(name = "send_date", nullable = false)
-    private LocalDateTime sendDate;
+    @Column(name = "send_date")
+    private LocalDateTime sendDateSender;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "pickup_date")
+    private LocalDateTime pickupDate;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "send_date_driver")
+    private LocalDateTime sendDateDriver;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "receive_date_driver")
+    private LocalDateTime receiveDateDriver;
+
     @Column(name = "pickup_availability")
-    private LocalDateTime pickupAvailability;
+    private boolean pickupAvailability;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "pickup_expiry")
     private LocalDateTime pickupExpiry;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
+    @Column(name = "send_expiry")
+    private LocalDateTime sendExpiry;
+
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    @Column(name = "date_created", nullable = false)
+    @Column(name = "date_created")
     private LocalDateTime dateCreated;
 
     @UpdateTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
-    @Column(name = "date_updated", nullable = false)
+    @Column(name = "date_updated")
     private LocalDateTime dateUpdated;
+
+    public Parcel( String trackingNumber, ParcelStatus status, String city, String address, String zipcode, Receiver receiver, Sender sender, double weigh, double heigh, double width) {
+        this.trackingNumber = trackingNumber;
+        this.status = status;
+        this.city = city;
+        this.address = address;
+        this.zipcode = zipcode;
+        this.receiver = receiver;
+        this.sender = sender;
+        this.weigh = weigh;
+        this.heigh = heigh;
+        this.width = width;
+        this.pickupAvailability = false;
+    }
+
+    @Override
+    public String toString() {
+        return "Parcel [id=" + id + ", trackingNumber=" + trackingNumber + ", status=" + status + ", city=" + city
+                + ", address=" + address + ", zipcode=" + zipcode + ", receiver=" + receiver + ", sender=" + sender
+                + ", driver=" + driver + ", cabinet=" + cabinet + ", weigh=" + weigh + ", heigh=" + heigh + ", width="
+                + width + ", sendDateSender=" + sendDateSender + ", pickupDate=" + pickupDate + ", sendDateDriver="
+                + sendDateDriver + ", receiveDateDriver=" + receiveDateDriver + ", pickupAvailability="
+                + pickupAvailability + ", pickupExpiry=" + pickupExpiry + ", sendExpiry=" + sendExpiry
+                + ", dateCreated=" + dateCreated + ", dateUpdated=" + dateUpdated + "]";
+    }
+
+
+    
 }

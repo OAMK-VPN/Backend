@@ -1,0 +1,888 @@
+{
+	"info": {
+		"_postman_id": "c0abd0bf-cf80-4b55-b3ce-fd47b51024ba",
+		"name": "parcel delivery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19366908"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "signIn",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"quan\",\r\n    \"password\": \"123456\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/signIn",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"signIn"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "sign up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"quan5\",\r\n    \"password\": \"123456\",\r\n    \"firstname\": \"quan5\",\r\n    \"surename\": \"doan\",\r\n    \"longitude\": 65.0569611,\r\n    \"latitude\": 25.4743148\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get user by username",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg4OTQ2MzkyLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.CMkQl3Rlh7eduGq_JfvOAhWvQZXDgAu17OKVihrP9AfnB-8Tl8pfVc-M4wjk4elc8qHnqex9V7RVNYMCn3Vqlg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"quan\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/username/quan",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"username",
+								"quan"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get authUser",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg1MDQ3ODIxLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.nkScf8dXsfYk9wCmHxsJkbQdUGoNAbb6empJ5V-4YaercAUX0UK8YCQWQyPj5T2smhFIJcTL3ZtzK6dg-DeD0Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"quan\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/authUser/getAuthUser",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"authUser",
+								"getAuthUser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNjg5ODkyNjAxLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.nP7GZK_T0Jt_ol5pqO8KIMgOfDCAwTMOqwbh9k6YZC-DmMK85kDqZATwIcSIc6YyJI23LvXancA0Bxezx_XJ8Q",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123456\",\r\n    \"newPassword\": \"1234567\",\r\n    \"confirmPassword\": \"1234567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/users/authUser/updatePassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"users",
+								"authUser",
+								"updatePassword"
+							],
+							"query": [
+								{
+									"key": "firstname",
+									"value": "quan1996",
+									"disabled": true
+								},
+								{
+									"key": "surename",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Locker",
+			"item": [
+				{
+					"name": "get all lockers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/lockers/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"lockers",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all locker by zipcode",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/lockers/zipcode/90100",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"lockers",
+								"zipcode",
+								"90100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all locker by city",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/lockers/city/oulu",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"lockers",
+								"city",
+								"oulu"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by locker ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/lockers/locker/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"lockers",
+								"locker",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Cabinet",
+			"item": [
+				{
+					"name": "get all cabinets of a parcel locker",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cabinets/locker/2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cabinets",
+								"locker",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cabinet by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cabinets/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cabinets",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update empty status for the cabinet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cabinets/10/updateEmptyStatus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cabinets",
+								"10",
+								"updateEmptyStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check and update code for the cabinet",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/cabinets/10/updateCode?code=V1MUU0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"cabinets",
+								"10",
+								"updateCode"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "code",
+									"value": "V1MUU0"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parcel",
+			"item": [
+				{
+					"name": "get parcels by authenticated Receiver",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJoYW5nIiwiZXhwIjoxNzAwNjk4NTUzLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.GyRrF4Vuyg7k3SooL-E3ljSVdcMKvy9sQdM6qw3pQnPG2I6941YoF60gMszyYsYcbh8m6Dcb357uGilWyGykVw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/receiver",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"receiver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get parcels by authenticated sender",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNzAwNjk5MDMxLCJhdXRob3JpdGllcyI6WyJVU0VSIl19.oOkMDV9L2mOC4a9RsutRPOzs_1X2JVKfZPypGUlrhVulC1Z4igigQY18Xfbw6fG5b7rDOOYnDacuqJlKgr7ehQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/sender",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"sender"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get parcels by authenticated driver",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uUHVibGljSWQiOiI5NjA0MTA3Ni03ZDI5LTQxMDgtOTk4NS1lOTI0NDlhZDEyOTYiLCJlbWFpbCI6Imh1eUBnb211bmNoaS5jb20iLCJvcmRlcmluZ1VzZXJJZCI6NjQ2MiwiaWF0IjoxNzAwNDg2MDU0LCJleHAiOjE3MDMwNzgwNTR9.XN6vtasdImm8Ilv2k7vkGjor2CvK2FdG7bINOVoTq7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/driver",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"driver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get the parcel by tracking",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/unsecure/tracking/lkjsalfdkj32132132123",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"unsecure",
+								"tracking",
+								"lkjsalfdkj32132132123"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get parcel by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/parcel/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"parcel",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buy the parcel",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNzAwNzAwMTU4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.a5a355Un4Ms7drgKC3cr03_zis26-EjoSDSBSJRhu_sCIKPte3T0iqDXcFNYKdNEKZscmo_KHG-ZOx8_zF9dsg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"emailReceiver\": \"hang@gmail.com\",\r\n    \"weigh\": 4,\r\n    \"heigh\": 0.4,\r\n    \"width\": 0.3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/buy",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"buy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "drop off the parcel by locker ID and CODE",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/unsecure/drop-off/locker/10/code/5138",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"unsecure",
+								"drop-off",
+								"locker",
+								"10",
+								"code",
+								"5138"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pickup the parcel by locker ID and CODE",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/unsecure/picked-up/locker/10/code/3534",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"unsecure",
+								"picked-up",
+								"locker",
+								"10",
+								"code",
+								"3534"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assigned all parcels to drivers (testing)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNzAwNzAwMTU4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.a5a355Un4Ms7drgKC3cr03_zis26-EjoSDSBSJRhu_sCIKPte3T0iqDXcFNYKdNEKZscmo_KHG-ZOx8_zF9dsg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/assign-all-to-drivers",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"assign-all-to-drivers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check all expired pick-up parcels (testing)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNzAwNzAwMTU4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.a5a355Un4Ms7drgKC3cr03_zis26-EjoSDSBSJRhu_sCIKPte3T0iqDXcFNYKdNEKZscmo_KHG-ZOx8_zF9dsg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/check-pickup-expired",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"check-pickup-expired"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "check all expired sending parcels (testing)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWFuIiwiZXhwIjoxNzAwNzAwMTU4LCJhdXRob3JpdGllcyI6WyJVU0VSIl19.a5a355Un4Ms7drgKC3cr03_zis26-EjoSDSBSJRhu_sCIKPte3T0iqDXcFNYKdNEKZscmo_KHG-ZOx8_zF9dsg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/parcels/check-send-expired",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"parcels",
+								"check-send-expired"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Driver",
+			"item": [
+				{
+					"name": "get drivers by city",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uUHVibGljSWQiOiI5NjA0MTA3Ni03ZDI5LTQxMDgtOTk4NS1lOTI0NDlhZDEyOTYiLCJlbWFpbCI6Imh1eUBnb211bmNoaS5jb20iLCJvcmRlcmluZ1VzZXJJZCI6NjQ2MiwiaWF0IjoxNzAwNDg2MDU0LCJleHAiOjE3MDMwNzgwNTR9.XN6vtasdImm8Ilv2k7vkGjor2CvK2FdG7bINOVoTq7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/drivers/city/OULU",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drivers",
+								"city",
+								"OULU"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get the driver by authenticated user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrd2FuZyIsImV4cCI6MTcwMDcwMDE0NCwiYXV0aG9yaXRpZXMiOlsiVVNFUiJdfQ.ZWcOPXoi_wPtSOup6QVKH1Jaw_XjuX7d2N4qMGAJ0MFGhzH3Jf0UntkH6DkluwMo4dGNhn7PZSt915yMQtafeQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/drivers/driver/authenticated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"drivers",
+								"driver",
+								"authenticated"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Sender",
+			"item": [
+				{
+					"name": "get sender by authenticated sender",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uUHVibGljSWQiOiI5NjA0MTA3Ni03ZDI5LTQxMDgtOTk4NS1lOTI0NDlhZDEyOTYiLCJlbWFpbCI6Imh1eUBnb211bmNoaS5jb20iLCJvcmRlcmluZ1VzZXJJZCI6NjQ2MiwiaWF0IjoxNzAwNDg2MDU0LCJleHAiOjE3MDMwNzgwNTR9.XN6vtasdImm8Ilv2k7vkGjor2CvK2FdG7bINOVoTq7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/senders/sender/authenticated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"senders",
+								"sender",
+								"authenticated"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Receiver",
+			"item": [
+				{
+					"name": "get receiver by authenticated receiver",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzZXNzaW9uUHVibGljSWQiOiI5NjA0MTA3Ni03ZDI5LTQxMDgtOTk4NS1lOTI0NDlhZDEyOTYiLCJlbWFpbCI6Imh1eUBnb211bmNoaS5jb20iLCJvcmRlcmluZ1VzZXJJZCI6NjQ2MiwiaWF0IjoxNzAwNDg2MDU0LCJleHAiOjE3MDMwNzgwNTR9.XN6vtasdImm8Ilv2k7vkGjor2CvK2FdG7bINOVoTq7A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/api/receivers/receiver/authenticated",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"receivers",
+								"receiver",
+								"authenticated"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

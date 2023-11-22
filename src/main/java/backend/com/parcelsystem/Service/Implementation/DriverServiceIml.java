@@ -1,5 +1,6 @@
 package backend.com.parcelsystem.Service.Implementation;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,10 @@ public class DriverServiceIml implements DriverService {
             Driver courier = entity.get();
             return courier;
         }
+    }
+
+    @Override
+    public List<Driver> getDriversByCity(String city) {
+        return driverRepos.findDriversByCity(city.toUpperCase());
     }
 }
