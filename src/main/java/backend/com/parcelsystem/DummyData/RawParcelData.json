@@ -1,0 +1,99 @@
+{
+    
+    "id": 1,
+    "trackingNumber": "7d791174-638c-450e-a320-0e6c7effdaf8",
+    "status": "IN_DELIVERY",
+    "city": "HELSINKI",
+    "address": "Kalteentie 2",
+    "zipcode": "00770",
+    "receiver": {
+        "id": 1,
+        "user": {
+            "id": 3,
+            "username": "hang",
+            "email": "hang@gmail.com",
+            "fullname": "hang",
+            "roles": [
+                "USER"
+            ],
+            "city": "HELSINKI",
+            "address": "Malminkaari 19",
+            "zipcode": "00700",
+            "active": true
+        }
+    },
+    "sender": {
+        "id": 1,
+        "user": {
+            "id": 2,
+            "username": "peter",
+            "email": "peter@gmail.com",
+            "fullname": "Peter senull00",
+            "roles": [
+                "USER"
+            ],
+            "city": "OULU",
+            "address": "Tehtaankatu 3",
+            "zipcode": "90130",
+            "active": true
+        }
+    },
+    "driver": {
+        "id": 1,
+        "user": {
+            "id": 4,
+            "username": "kwang",
+            "email": "kwang@gmail.com",
+            "fullname": "kwang",
+            "roles": [
+                "USER"
+            ],
+            "city": "HELSINKI",
+            "address": "kalteentie 2",
+            "zipcode": "00770",
+            "active": true
+        }
+    },
+    "cabinet": {
+        "id": 187,
+        "num": 7,
+        "weigh": 1.4942690154716918,
+        "heigh": 0.3827696810692124,
+        "width": 0.32829260380266706,
+        "locker": {
+            "id": 10,
+            "name": "Postnord Automaatti K-market Masurkka",
+            "totalCabinets": 20,
+            "city": "HELSINKI",
+            "address": "Käpyläntie 8",
+            "zipcode": "00600"
+        },
+        "code": {
+            "id": 187,
+            "code": "1306",
+            "locker": {
+                "id": 10,
+                "name": "Postnord Automaatti K-market Masurkka",
+                "totalCabinets": 20,
+                "city": "HELSINKI",
+                "address": "Käpyläntie 8",
+                "zipcode": "00600"
+            }
+        },
+        "empty": true,
+        "filled": false
+    },
+    "weigh": 5.0,
+    "heigh": 0.4,
+    "width": 0.4,
+    "sendDateSender": null,
+    "pickupDate": null,
+    "sendDateDriver": null,
+    "receiveDateDriver": null,
+    "pickupAvailability": false,
+    "pickupExpiry": null,
+    "sendExpiry": null,
+    "dateCreated": "2023-11-23 16:20",
+    "dateUpdated": "2023-11-23 16:20"
+
+}

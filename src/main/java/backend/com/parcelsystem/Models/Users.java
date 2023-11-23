@@ -38,7 +38,7 @@ public class Users {
     private String email;
 
     @NotBlank(message = "fullname cannot be blank")
-    @Column(name = "fullname", nullable = false, unique = true)
+    @Column(name = "fullname", nullable = false)
     private String fullname;
 
 
