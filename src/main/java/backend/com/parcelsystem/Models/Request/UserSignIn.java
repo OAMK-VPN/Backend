@@ -10,14 +10,18 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserSignIn {
-    private String username;
+    private String email;
     private String password;
-    private Double longitude;
-    private Double latitude;
+    private boolean isDriver;
 
-    public UserSignIn(String username, String password) {
-        this.username = username;
+    public UserSignIn(String email, String password) {
+        this.email = email;
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "UserSignIn [email=" + email + ", password=" + password + ", isDriver=" + isDriver + "]";
     }
 
     

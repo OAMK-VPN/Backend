@@ -37,6 +37,10 @@ public class Cabinet {
     @Column(name = "width", nullable = false)
     private double width;
 
+    @Min(value = 0, message = "length must be higher than 0")
+    @Column(name = "length", nullable = false)
+    private double length;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "locker_id", referencedColumnName = "id")
     private Locker locker;

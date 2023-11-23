@@ -75,6 +75,10 @@ public class Parcel {
     @Column(name = "width", nullable = false)
     private double width;
 
+    @Min(value = 0, message = "length must be higher than 0")
+    @Column(name = "length", nullable = false)
+    private double length;
+
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "send_date")
     private LocalDateTime sendDateSender;
@@ -112,7 +116,7 @@ public class Parcel {
     @Column(name = "date_updated")
     private LocalDateTime dateUpdated;
 
-    public Parcel( String trackingNumber, ParcelStatus status, String city, String address, String zipcode, Receiver receiver, Sender sender, double weigh, double heigh, double width) {
+    public Parcel( String trackingNumber, ParcelStatus status, String city, String address, String zipcode, Receiver receiver, Sender sender, double weigh, double heigh, double width, double length) {
         this.trackingNumber = trackingNumber;
         this.status = status;
         this.city = city;
@@ -123,6 +127,7 @@ public class Parcel {
         this.weigh = weigh;
         this.heigh = heigh;
         this.width = width;
+        this.length = length;
         this.pickupAvailability = false;
     }
 

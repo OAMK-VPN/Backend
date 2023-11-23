@@ -16,4 +16,5 @@ public class ParcelRequest {
     private double weigh;
     private double heigh;
     private double width;
+    private double length;
 }

@@ -13,6 +13,7 @@ public interface UserService {
     Users getUserByUsername(String username);
     Users getUserByEmail(String email);
     AuthResponse saveUser(UserSignUp userSignup);
+    AuthResponse saveDriver(UserSignUp userSignup);
     AuthResponse signIn(UserSignIn userSignIn);
     Users getAuthUser();
     Users updatePassword(PasswordForm passwordForm);

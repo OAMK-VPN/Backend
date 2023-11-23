@@ -61,12 +61,13 @@ public class DataLoader implements CommandLineRunner {
 
             List<Cabinet> cabinets = new ArrayList<>();
 
-            for (int i = 1; i <= 20; i++) {
+            for (int i = 1; i <= 5; i++) {
                 Cabinet cabinet = new Cabinet();
                 cabinet.setNum(i);
                 cabinet.setWeigh(generateRandomWeight());
                 cabinet.setHeigh(generateRandomHeight());
                 cabinet.setWidth(generateRandomWidth());
+                cabinet.setLength(generateRandomLength());
                 cabinet.setLocker(parcelLocker);
                 cabinet.setEmpty(true);
                 cabinet.setFilled(false);
@@ -102,6 +103,10 @@ public class DataLoader implements CommandLineRunner {
     }
 
     private double generateRandomWidth() {
+        return (0.3 + new Random().nextDouble() * 0.2); // Random width between 0.3 and 0.5 m
+    }
+
+     private double generateRandomLength() {
         return (0.3 + new Random().nextDouble() * 0.2); // Random width between 0.3 and 0.5 m
     }
 

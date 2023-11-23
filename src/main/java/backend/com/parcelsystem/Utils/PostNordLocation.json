@@ -1,40 +1,6 @@
 [
     
-    {
-      "name": "Postnord K-supermarket Joutsensilta",
-      "address": "Paljetie 4",
-      "zipcode": "90150",
-      "city": "OULU",
-      "totalCabinets": 20
-    },
-    {
-      "name": "Postnord Automaatti S-market Tuira",
-      "address": "Valtatie 28",
-      "zipcode": "90500",
-      "city": "OULU",
-      "totalCabinets": 20
-    },
-    {
-      "name": "Postnord Lähiboksi Sale Höyhtyä",
-      "address": "Latokartanontie 1",
-      "zipcode": "90150",
-      "city": "OULU",
-      "totalCabinets": 20
-    },
-    {
-      "name": "Postnord Automaatti Prisma Limingantulli Oulu",
-      "address": "Nuottasaarentie 1",
-      "zipcode": "90130",
-      "city": "OULU",
-      "totalCabinets": 20
-    },
-    {
-      "name": "Postnord Automaatti Kärkkäinen Oulu",
-      "address": "Alasintie 12",
-      "zipcode": "90400",
-      "city": "OULU",
-      "totalCabinets": 20
-    },
+    
     {
       "name": "Postnord Lähiboksi Prisma Limingantulli",
       "address": "Nuottasaarentie 1",
@@ -90,41 +56,7 @@
         "zipcode": "00620",
         "city": "HELSINKI",
         "totalCabinets": 20
-    },
-    {
-        "name": "Postnord K-market Pikkupekka",
-        "address": "Kisällinkuja 2",
-        "zipcode": "00640",
-        "city": "HELSINKI",
-        "totalCabinets": 20
-    },
-    {
-        "name": "Postnord Automaatti K-market Pikkupekka",
-        "address": "Kisällinkuja 2",
-        "zipcode": "00640",
-        "city": "HELSINKI",
-        "totalCabinets": 20
-    },
-    {
-        "name": "Postnord K-market Amerinkulma",
-        "address": "Mäkelänkatu 87",
-        "zipcode": "00610",
-        "city": "HELSINKI",
-        "totalCabinets": 20
-    },
-    {
-        "name": "Postnord K-market Toukola",
-        "address": "Hämeentie 155",
-        "zipcode": "00560",
-        "city": "HELSINKI",
-        "totalCabinets": 20
-    },
-    {
-        "name": "Postnord Automaatti Alepa Viikinmäki",
-        "address": "Harjannetie 46",
-        "zipcode": "00710",
-        "city": "HELSINKI",
-        "totalCabinets": 20
     }
+   
     
 ] 

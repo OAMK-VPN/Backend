@@ -60,15 +60,15 @@ public class ParcelsystemApplication {
 			receiverRepos.save(hangReceiver);
 
 
-			Parcel parcel = new Parcel(UUID.randomUUID().toString(), ParcelStatus.IN_DELIVERY, "HELSINKI" ,"Kalteentie 2", "00770", hangReceiver, peterCustomer, 5, 0.4, 0.4);
-			parcel.setDriver(Kwangdriver);
-			Optional<Cabinet> cabinetEntity = cabinetRepos.findById(187L);
-			Cabinet cabinet = cabinetEntity.get();
+			// Parcel parcel = new Parcel(UUID.randomUUID().toString(), ParcelStatus.IN_DELIVERY, "HELSINKI" ,"Kalteentie 2", "00770", hangReceiver, peterCustomer, 5, 0.4, 0.4);
+			// parcel.setDriver(Kwangdriver);
+			// Optional<Cabinet> cabinetEntity = cabinetRepos.findById(187L);
+			// Cabinet cabinet = cabinetEntity.get();
 
-			parcel.setCabinet(cabinet);
-			parcel.setPickupAvailability(false);
+			// parcel.setCabinet(cabinet);
+			// parcel.setPickupAvailability(false);
 			
-			parcelRepos.save(parcel);
+			// parcelRepos.save(parcel);
 
 			
 

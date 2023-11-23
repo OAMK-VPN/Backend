@@ -51,6 +51,8 @@ public class SecurityConfig {
         .authorizeHttpRequests()
         .requestMatchers("/api/users/signIn").permitAll()
         .requestMatchers("/api/users/signup").permitAll()
+        .requestMatchers("/api/users/signup-driver").permitAll()
+        .requestMatchers("/api/users/signIn-driver").permitAll()
         .requestMatchers("/api/lockers/**").permitAll()
         .requestMatchers("/api/cabinets/**").permitAll()
         .requestMatchers("/api/users/forgotPassword").permitAll()

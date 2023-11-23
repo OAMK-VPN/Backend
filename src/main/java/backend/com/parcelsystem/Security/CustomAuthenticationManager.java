@@ -27,15 +27,16 @@ public class CustomAuthenticationManager implements AuthenticationManager {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String username = authentication.getName();
-        String password = authentication.getCredentials().toString();
-        UserDetails users = userServiceIml.loadUserByUsername(username);
+    //     String username = authentication.getName();
+    //     String password = authentication.getCredentials().toString();
+    //     UserDetails users = userServiceIml.loadUserByUsername(username);
 
-       if(!new BCryptPasswordEncoder().matches(password, users.getPassword())) {
-        throw new BadCredentialsException("the password is wrong");
-       }
-       Authentication authentication2 = new UsernamePasswordAuthenticationToken(users, users.getPassword(), users.getAuthorities());
+    //    if(!new BCryptPasswordEncoder().matches(password, users.getPassword())) {
+    //     throw new BadCredentialsException("the password is wrong");
+    //    }
+    //    Authentication authentication2 = new UsernamePasswordAuthenticationToken(users, users.getPassword(), users.getAuthorities());
 
-       return authentication2;
+    //    return authentication2;
+        return null;
     }
 }

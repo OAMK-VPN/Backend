@@ -3,6 +3,8 @@ package backend.com.parcelsystem.Controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,6 +46,13 @@ public class UserController {
     public ResponseEntity<AuthResponse> signIn(@Valid @RequestBody UserSignIn userSignIn) {
         return new ResponseEntity<AuthResponse>(userService.signIn(userSignIn), HttpStatus.OK);
     }
+
+    @PreAuthorize("hasRole('ROLE_DRIVER')")
+    @PutMapping("/signIn-driver")
+    public ResponseEntity<AuthResponse> signInDriver(@Valid @RequestBody UserSignIn userSignIn) {
+        return new ResponseEntity<AuthResponse>(userService.signIn(userSignIn), HttpStatus.OK);
+    }
+
     //requires token
     @GetMapping("/authUser/getAuthUser")
     public ResponseEntity<UserResponse> getAuthUser() {
@@ -54,6 +63,12 @@ public class UserController {
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody UserSignUp userSignup) {
         return new ResponseEntity<AuthResponse>(userService.saveUser(userSignup), HttpStatus.CREATED);
+    }
+
+     // signup for driver
+    @PostMapping("/signup-driver")
+    public ResponseEntity<AuthResponse> registerfordriver(@Valid @RequestBody UserSignUp userSignup) {
+        return new ResponseEntity<AuthResponse>(userService.saveDriver(userSignup), HttpStatus.CREATED);
     }
 
     //requires token

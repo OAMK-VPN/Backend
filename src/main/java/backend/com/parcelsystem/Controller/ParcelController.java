@@ -1,8 +1,11 @@
 package backend.com.parcelsystem.Controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +18,7 @@ import backend.com.parcelsystem.Mapper.ParcelMapper;
 import backend.com.parcelsystem.Models.Parcel;
 import backend.com.parcelsystem.Models.Enums.ParcelStatus;
 import backend.com.parcelsystem.Models.Request.ParcelRequest;
+import backend.com.parcelsystem.Models.Response.Parcel.ParcelResponse;
 import backend.com.parcelsystem.Service.ParcelService;
 
 @RestController
@@ -26,63 +30,87 @@ public class ParcelController {
     @Autowired
     ParcelMapper parcelMapper;
 
-    
     // authenticated
     @GetMapping("/receiver")
-    public List<Parcel> getAllByAuthReceiver() {
-        return parcelService.getAllByAuthReceiver();
-    }
-
-     // authenticated
-    @GetMapping("/sender")
-    public List<Parcel> getAllByAuthSender() {
-        return parcelService.getAllByAuthSender();
-    }
-
-     // authenticated
-    @GetMapping("/driver")
-    public List<Parcel> getALLByAuthDriver() {
-        return parcelService.getALLByAuthDriverAndStatus();
+    public ResponseEntity<List<ParcelResponse>> getAllByAuthReceiver() {
+        List<Parcel> parcels = parcelService.getAllByAuthReceiver();
+        List<ParcelResponse> res = parcels.stream()
+        .map(parcel -> parcelMapper.mapParcelToResponseForReceiver(parcel))
+        .collect(Collectors.toList());
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     // authenticated
-    @GetMapping("/parcel/{id}")
-    public Parcel getParcelById(@PathVariable Long id) {
-        return parcelService.getParcelById(id);
+    @GetMapping("/sender")
+    public ResponseEntity<List<ParcelResponse>> getAllByAuthSender() {
+        List<Parcel> parcels = parcelService.getAllByAuthSender();
+        List<ParcelResponse> res = parcels.stream()
+        .map(parcel -> parcelMapper.mapParcelToResponseForSender(parcel))
+        .collect(Collectors.toList());
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    // authenticated
+    @GetMapping("/driver")
+    public ResponseEntity<List<ParcelResponse>> getALLByAuthDriver() {
+        List<Parcel> parcels = parcelService.getALLByAuthDriverAndStatus();
+        List<ParcelResponse> res = parcels.stream()
+        .map(parcel -> parcelMapper.mapParcelToResponseForDriverApp(parcel))
+        .collect(Collectors.toList());
+        return new ResponseEntity<>(res, HttpStatus.OK);
+    }
+
+    // authenticated (/parcel/2/role/DRIVER) ->ROLE: DRIVER, RECEIVER, SENDER
+    @GetMapping("/parcel/{id}/role/{role}")
+    public ResponseEntity<ParcelResponse> getParcelById(@PathVariable Long id, @PathVariable String role) {
+        Parcel parcel = parcelService.getParcelById(id);
+        ParcelResponse res = parcelMapper.mapParcelToResponseForParcelID(parcel, role);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @GetMapping("/unsecure/tracking/{trackingNumber}")
-    public Parcel trackingParcel(@PathVariable String trackingNumber) {
-        return parcelService.trackingParcel(trackingNumber);
+    public ResponseEntity<ParcelResponse> trackingParcel(@PathVariable String trackingNumber) {
+        Parcel parcel = parcelService.trackingParcel(trackingNumber);
+        ParcelResponse res = parcelMapper.mapParcelToResponseForTrackingNumber(parcel);
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
     @PostMapping("/buy")
-    public Parcel buyParcel(@RequestBody ParcelRequest req) {
-        return parcelService.buyParcel(req);
+    public ResponseEntity<ParcelResponse> buyParcel(@RequestBody ParcelRequest req) {
+        Parcel parcel = parcelService.buyParcel(req);
+        ParcelResponse res = parcelMapper.mapParcelToResponseForSender(parcel);
+        return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
     @PutMapping("/unsecure/drop-off/locker/{lockerId}/code/{code}")
-    public Parcel dropOffParcelIntoCabinet(@PathVariable Long lockerId, @PathVariable String code) {
-        return parcelService.dropOffParcelIntoCabinet(lockerId, code);
+    public ResponseEntity<Boolean> dropOffParcelIntoCabinet(@PathVariable Long lockerId, @PathVariable String code) {
+        Parcel parcel = parcelService.dropOffParcelIntoCabinet(lockerId, code);
+        Boolean isOpen = parcel != null ? true : false;
+        return new ResponseEntity<>(isOpen, HttpStatus.OK);
     }
 
     @PutMapping("/unsecure/picked-up/locker/{lockerId}/code/{code}")
-    public Parcel pickedUpParcelByReceiver(@PathVariable Long lockerId, @PathVariable String code) {
-        return parcelService.pickedUpParcelByReceiver(lockerId, code);
+    public ResponseEntity<Boolean> pickedUpParcelByReceiver(@PathVariable Long lockerId, @PathVariable String code) {
+        Parcel parcel = parcelService.pickedUpParcelByReceiver(lockerId, code);
+        Boolean isOpen = parcel != null ? true : false;
+        return new ResponseEntity<>(isOpen, HttpStatus.OK);
     }
 
     @PutMapping("/assign-all-to-drivers")
-    public List<Parcel> assignAllParcelsToDrivers() {
-        return parcelService.assignAllParcelsToDrivers();
+    public ResponseEntity<List<Parcel>> assignAllParcelsToDrivers() {
+        List<Parcel> parcels = parcelService.assignAllParcelsToDrivers();
+        return new ResponseEntity<>(parcels, HttpStatus.OK);
     }
 
     @PutMapping("/check-pickup-expired")
-    public List<Parcel> checkAllPickupExpiredParcels() {
-        return parcelService.CheckAllPickupExpiredParcels();
+    public ResponseEntity<List<Parcel>> checkAllPickupExpiredParcels() {
+        List<Parcel> parcels = parcelService.CheckAllPickupExpiredParcels();
+        return new ResponseEntity<>(parcels, HttpStatus.OK);
     }
 
     @PutMapping("/check-send-expired")
-    public List<Parcel> checkAllSendExpiredParcels() {
-        return parcelService.CheckAllSendExpiredParcels();
+    public ResponseEntity<List<Parcel>> checkAllSendExpiredParcels() {
+        List<Parcel> parcels = parcelService.CheckAllSendExpiredParcels();
+        return new ResponseEntity<>(parcels, HttpStatus.OK);
     }
 }

@@ -1,0 +1,47 @@
+// if there's no code (depends on the status) it should return code: '' (empty string). When user sends the parcel sender should see the code for drop off
+// but driver and receiver get the code = '' (empty string) | status WAITING_FOR_SENDER
+// for example if STATUS in DELIVERY then sender or receiver don't see the code (code = ''), but driver sees the code
+// IF STATUS is READY TO PICKUP then receiver sees the code and all other sees the code = ''
+
+
+
+{
+    "trackingNumber": "7d791174-638c-450e-a320-0e6c7effdaf8",
+    "status": "IN_DELIVERY",
+    "city": "HELSINKI",
+    "address": "Kalteentie 2",
+    
+    
+    "receiver": {
+        "fullname": "hang",
+        "city": "HELSINKI"
+        
+    }, 
+    "sender": { 
+        "fullname": "Peter senull00",
+        "city": "OULU"    
+    }, 
+    "cabinet": {
+        "num": 7,
+        "locker": {
+            "id": 10,
+            "address": "Käpyläntie 8",
+            "zipcode": "00600"
+        },
+     
+        "code": "1306",
+        "empty": true,
+        "filled": false
+    },
+    "weigh": 5.0,
+    "heigh": 0.4,
+    "width": 0.4,
+    "sendDateSender": null,
+    "pickupDate": null,
+    "receiveDateDriver": null,
+    "pickupAvailability": false,
+    "pickupExpiry": null,
+    "sendExpiry": null,
+    "dateCreated": "2023-11-23 16:20",
+    "dateUpdated": "2023-11-23 16:20"
+}

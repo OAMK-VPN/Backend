@@ -65,7 +65,7 @@ public class ParcelServiceIml implements ParcelService {
         List<Cabinet> emptyCabinets = cabinetService.getEmptyCabinetsByCity(sender.getUser().getCity());
 
         // create the new parcel object
-        Parcel parcel = new Parcel(generateTrackingNumber(), ParcelStatus.WAITING_FOR_SENDER, cityDestination, addressDestination, zipcodeDestination, receiver, sender, req.getWeigh(), req.getHeigh(), req.getWidth());
+        Parcel parcel = new Parcel(generateTrackingNumber(), ParcelStatus.WAITING_FOR_SENDER, cityDestination, addressDestination, zipcodeDestination, receiver, sender, req.getWeigh(), req.getHeigh(), req.getWidth(), req.getLength());
         parcel.setSendExpiry(LocalDateTime.now().plusDays(5));
         System.out.println(parcel);
 
@@ -374,9 +374,10 @@ public List<Parcel> assignAllParcelsToDrivers() {
         boolean isHeightFit = cabinet.getHeigh() >= parcel.getHeigh();
         boolean isWidthFit = cabinet.getWidth() >= parcel.getWidth();
         boolean isWeightFit = cabinet.getWeigh() >= parcel.getWeigh();
+        boolean isLengthFit = cabinet.getLength() >= parcel.getLength();
     
         // If all dimensions are large enough, the cabinet is a fit
-        if (isHeightFit && isWidthFit && isWeightFit) {
+        if (isHeightFit && isWidthFit && isWeightFit && isLengthFit) {
             return 1.0; 
         } else {
             return 0.0; 

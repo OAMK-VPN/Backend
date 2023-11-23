@@ -19,12 +19,27 @@ public class UserSignUp {
     private String city;
     private String address;
     private String zipcode;
+    private String driverCode;
     
-    public UserSignUp(String username, String password, String email) {
+    public UserSignUp(String username, String password, String fullname, String email, String city, String address,
+            String zipcode) {
         this.username = username;
         this.password = password;
+        this.fullname = fullname;
         this.email = email;
+        this.city = city;
+        this.address = address;
+        this.zipcode = zipcode;
     }
+
+    @Override
+    public String toString() {
+        return "UserSignUp [username=" + username + ", password=" + password + ", fullname=" + fullname + ", email="
+                + email + ", city=" + city + ", address=" + address + ", zipcode=" + zipcode + ", driverCode="
+                + driverCode + "]";
+    }
+    
+    
 
 
    
