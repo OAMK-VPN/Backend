@@ -20,6 +20,7 @@ public class UserMapper {
 
     public UserResponse mapUserToResponse(Users user) {
       UserResponse res = modelMapper.map(user, UserResponse.class);
+      System.out.println("res: " + res);
       return res;
     }
 

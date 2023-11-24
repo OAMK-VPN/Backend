@@ -99,7 +99,7 @@ public class UserServiceIml implements UserService, UserDetailsService {
     public Users getUserByEmail(String email) {
         Optional<Users> entity = userRepos.findByEmail(email);
         if(!entity.isPresent()) {
-         throw new EntityNotFoundException("the username not found");
+         throw new EntityNotFoundException("the email not found");
         }
         Users users = entity.get();
         return users;
@@ -116,7 +116,7 @@ public class UserServiceIml implements UserService, UserDetailsService {
     }
 
     @Override
-    public AuthResponse saveUser(UserSignUp signUp) {
+    public AuthResponse saveUser(UserSignUp signUp, boolean isDriver) {
         Optional<Users> entity = userRepos.findByEmail(signUp.getEmail());
         if(entity.isPresent()) {
          throw new EntityExistingException("the email exists");
@@ -135,7 +135,7 @@ public class UserServiceIml implements UserService, UserDetailsService {
         receiverRepos.save(receiver);
 
         // check the driver code to create the driver 
-        if(signUp.getDriverCode().equals("123456789")) {
+        if(isDriver == true && signUp.getDriverCode().equals("123456789")) {
             user.getRoles().add(Role.DRIVER);
             userRepos.save(user);
             Driver driver = new Driver(user);
@@ -164,22 +164,29 @@ public class UserServiceIml implements UserService, UserDetailsService {
             System.out.println("the driver code is not correct, you cannot register as an driver");
            throw new BadResultException("the driver code is not correct, you cannot register as an driver");
         } 
-        return saveUser(userSignup);
+        return saveUser(userSignup, true);
     }
 
     @Override
-    public AuthResponse signIn(UserSignIn userSignIn) {
+    public AuthResponse signIn(UserSignIn userSignIn, boolean isDriver) {
        
         Optional<Users> entity = userRepos.findByEmail(userSignIn.getEmail());
         if(!entity.isPresent()) {
            throw new EntityNotFoundException("the email not found");
         }
         Users user = entity.get();
-        if(user.isActive() == false) {
-            throw new BadResultException("the account was deleted");
-        }
         if(!new BCryptPasswordEncoder().matches(userSignIn.getPassword(), user.getPassword())) {
             throw new EntityNotFoundException("the password is wrong");
+        }
+        if(user.isActive() == false) {
+            reactiveAccount(user);
+        }
+        // check driver login or normal user login
+        if(isDriver == true) {
+            Optional<Driver> driverEntity = driverRepos.findByUser(user);
+            if(!driverEntity.isPresent()) {
+                throw new BadResultException("are not authorized to login as an driver");
+            }
         }
 
         List<String> claims = user.getRoles().stream().map(auth -> auth.getName()).collect(Collectors.toList());
@@ -204,6 +211,9 @@ public class UserServiceIml implements UserService, UserDetailsService {
     public Users getAuthUser() {
         String username = SecurityContextHolder.getContext().getAuthentication().getName();
         Users user = getUserByUsername(username);
+        if(user.isActive() == false) {
+            throw new BadResultException("the account was deactivated");
+        }
         return user;
     }
 
@@ -249,5 +259,65 @@ public class UserServiceIml implements UserService, UserDetailsService {
         }
         System.out.println(password);
         return password;
+    }
+
+    @Override
+    public Users updateProfile(String email, String fullname, String city, String address, String zipcode) {
+       Users authUsers = getAuthUser();
+
+       if (authUsers == null) {
+            throw new EntityNotFoundException("User not found");
+        }
+
+        // Update only non-null properties
+        if (email != null) {
+            boolean isDuplicated = checkEmailDuplication(email);
+            if(isDuplicated == true) {
+                throw new BadResultException("the email is existent");
+            }
+            authUsers.setEmail(email);;
+        }
+        if (fullname != null) {
+            authUsers.setFullname(fullname);
+        }
+        if (city != null) {
+            authUsers.setCity(city);
+        }
+        if (address != null) {
+            authUsers.setAddress(address);
+        }
+        if (zipcode != null) {
+            authUsers.setZipcode(zipcode);
+        }
+
+        return userRepos.save(authUsers);
+    }
+
+    @Override
+    public Users deactiveAccount() {
+        Users authUsers = getAuthUser();
+        System.out.println(authUsers);
+        if (authUsers == null) {
+                throw new EntityNotFoundException("User not found");
+            }
+
+        authUsers.setActive(false);
+        authUsers = userRepos.save(authUsers);
+        System.out.println(authUsers);
+        return authUsers;
+    }
+
+    @Override
+    public Users reactiveAccount(Users authUser) {
+        authUser.setActive(true);
+        return userRepos.save(authUser);
+    }
+
+    public Boolean checkEmailDuplication(String email) {
+        Optional<Users> entity = userRepos.findByEmail(email);
+        if(!entity.isPresent()) {
+         return false;
+        }
+        return true;
     }
 }

@@ -28,6 +28,12 @@ public class UserResponse {
     private String address;
     private String zipcode;
     private boolean active;
+    @Override
+    public String toString() {
+        return "UserResponse [id=" + id + ", username=" + username + ", email=" + email + ", fullname=" + fullname
+                + ", roles=" + roles + ", city=" + city + ", address=" + address + ", zipcode=" + zipcode + ", active="
+                + active + "]";
+    }
     
  
 }

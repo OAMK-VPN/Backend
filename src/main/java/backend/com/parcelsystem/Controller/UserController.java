@@ -44,13 +44,13 @@ public class UserController {
     }
     @PutMapping("/signIn")
     public ResponseEntity<AuthResponse> signIn(@Valid @RequestBody UserSignIn userSignIn) {
-        return new ResponseEntity<AuthResponse>(userService.signIn(userSignIn), HttpStatus.OK);
+        return new ResponseEntity<AuthResponse>(userService.signIn(userSignIn, false), HttpStatus.OK);
     }
 
-    @PreAuthorize("hasRole('ROLE_DRIVER')")
+    // @PreAuthorize("hasRole('DRIVER')")
     @PutMapping("/signIn-driver")
     public ResponseEntity<AuthResponse> signInDriver(@Valid @RequestBody UserSignIn userSignIn) {
-        return new ResponseEntity<AuthResponse>(userService.signIn(userSignIn), HttpStatus.OK);
+        return new ResponseEntity<AuthResponse>(userService.signIn(userSignIn, true), HttpStatus.OK);
     }
 
     //requires token
@@ -62,7 +62,7 @@ public class UserController {
     
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody UserSignUp userSignup) {
-        return new ResponseEntity<AuthResponse>(userService.saveUser(userSignup), HttpStatus.CREATED);
+        return new ResponseEntity<AuthResponse>(userService.saveUser(userSignup, false), HttpStatus.CREATED);
     }
 
      // signup for driver
@@ -81,5 +81,30 @@ public class UserController {
     @PutMapping("/forgotPassword")
     public ResponseEntity<String> forgotPassword(@RequestParam String email) {
         return new ResponseEntity<String>(userService.forgotPassword(email), HttpStatus.OK);
+    }
+
+    // authenticated
+    @PutMapping("/updateProfile")
+    public ResponseEntity<UserResponse> updateProfile(
+            @RequestParam(required = false) String email,
+            @RequestParam(required = false) String fullname,
+            @RequestParam(required = false) String city,
+            @RequestParam(required = false) String address,
+            @RequestParam(required = false) String zipcode) {
+
+            
+            Users user =userService.updateProfile(email, fullname, city, address, zipcode);
+            System.out.println(user);
+          
+            return new ResponseEntity<UserResponse>(userMapper.mapUserToResponse(user), HttpStatus.OK);
+            // return  ResponseEntity.ok("Profile updated successfully");
+    }
+
+    //requires token
+    @PutMapping("/authUser/deactive")
+    public ResponseEntity<AuthResponse> deactive() {
+        System.out.println("deactive account");
+        AuthResponse res = userMapper.mapUserToAuthReponse(userService.deactiveAccount());
+        return new ResponseEntity<AuthResponse>(res, HttpStatus.OK);
     }
 }

@@ -86,5 +86,13 @@ public class Users {
         this.active = true;
     }
 
+    @Override
+    public String toString() {
+        return "Users [id=" + id + ", username=" + username + ", password=" + password + ", email=" + email
+                + ", fullname=" + fullname + ", roles=" + roles + ", city=" + city + ", address=" + address
+                + ", zipcode=" + zipcode + ", active=" + active + ", driver=" + driver + ", receiver=" + receiver
+                + ", sender=" + sender + "]";
+    }
+
     
 }

@@ -12,10 +12,13 @@ public interface UserService {
     Users getUserById(Long id);
     Users getUserByUsername(String username);
     Users getUserByEmail(String email);
-    AuthResponse saveUser(UserSignUp userSignup);
+    AuthResponse saveUser(UserSignUp userSignup, boolean isDriver);
     AuthResponse saveDriver(UserSignUp userSignup);
-    AuthResponse signIn(UserSignIn userSignIn);
+    AuthResponse signIn(UserSignIn userSignIn, boolean isDriver);
     Users getAuthUser();
     Users updatePassword(PasswordForm passwordForm);
     String forgotPassword(String email);
+    Users updateProfile(String email, String fullname, String city, String address, String zipcode);
+    Users deactiveAccount();
+    Users reactiveAccount(Users authUser);
 }
