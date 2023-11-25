@@ -20,5 +20,5 @@ public interface UserService {
     String forgotPassword(String email);
     Users updateProfile(String email, String fullname, String city, String address, String zipcode);
     Users deactiveAccount();
-    Users reactiveAccount(Users authUser);
+    Users reactiveAccount();
 }

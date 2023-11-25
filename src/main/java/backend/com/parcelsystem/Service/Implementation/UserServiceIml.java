@@ -178,9 +178,6 @@ public class UserServiceIml implements UserService, UserDetailsService {
         if(!new BCryptPasswordEncoder().matches(userSignIn.getPassword(), user.getPassword())) {
             throw new EntityNotFoundException("the password is wrong");
         }
-        if(user.isActive() == false) {
-            reactiveAccount(user);
-        }
         // check driver login or normal user login
         if(isDriver == true) {
             Optional<Driver> driverEntity = driverRepos.findByUser(user);
@@ -308,9 +305,11 @@ public class UserServiceIml implements UserService, UserDetailsService {
     }
 
     @Override
-    public Users reactiveAccount(Users authUser) {
-        authUser.setActive(true);
-        return userRepos.save(authUser);
+    public Users reactiveAccount() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        Users user = getUserByUsername(username);
+        user.setActive(true);
+        return userRepos.save(user);
     }
 
     public Boolean checkEmailDuplication(String email) {

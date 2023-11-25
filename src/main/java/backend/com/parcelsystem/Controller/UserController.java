@@ -107,4 +107,12 @@ public class UserController {
         AuthResponse res = userMapper.mapUserToAuthReponse(userService.deactiveAccount());
         return new ResponseEntity<AuthResponse>(res, HttpStatus.OK);
     }
+
+     //requires token
+    @PutMapping("/authUser/reactive")
+    public ResponseEntity<AuthResponse> reactivate() {
+        System.out.println("deactive account");
+        AuthResponse res = userMapper.mapUserToAuthReponse(userService.reactiveAccount());
+        return new ResponseEntity<AuthResponse>(res, HttpStatus.OK);
+    }
 }
