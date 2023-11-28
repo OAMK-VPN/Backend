@@ -18,8 +18,11 @@ import backend.com.parcelsystem.Mapper.ParcelMapper;
 import backend.com.parcelsystem.Models.Parcel;
 import backend.com.parcelsystem.Models.Enums.ParcelStatus;
 import backend.com.parcelsystem.Models.Request.ParcelRequest;
+import backend.com.parcelsystem.Models.Request.SendLockerCodeRequest;
+import backend.com.parcelsystem.Models.Response.Locker.SendLockerCodeResponse;
 import backend.com.parcelsystem.Models.Response.Parcel.ParcelResponse;
 import backend.com.parcelsystem.Service.ParcelService;
+import org.springframework.http.MediaType;
 
 @RestController
 @RequestMapping("/api/parcels")
@@ -82,18 +85,23 @@ public class ParcelController {
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
-    @PutMapping("/unsecure/drop-off/locker/{lockerId}/code/{code}")
-    public ResponseEntity<Boolean> dropOffParcelIntoCabinet(@PathVariable Long lockerId, @PathVariable String code) {
-        Parcel parcel = parcelService.dropOffParcelIntoCabinet(lockerId, code);
+    @PutMapping("/public/drop-off/locker/{lockerId}/code/")
+    public ResponseEntity<SendLockerCodeResponse> dropOffParcelIntoCabinet(@PathVariable Long lockerId,
+            @RequestBody SendLockerCodeRequest request) {
+        Parcel parcel = parcelService.dropOffParcelIntoCabinet(lockerId, request.getCode());
         Boolean isOpen = parcel != null ? true : false;
-        return new ResponseEntity<>(isOpen, HttpStatus.OK);
+        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, isOpen);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/unsecure/picked-up/locker/{lockerId}/code/{code}")
-    public ResponseEntity<Boolean> pickedUpParcelByReceiver(@PathVariable Long lockerId, @PathVariable String code) {
-        Parcel parcel = parcelService.pickedUpParcelByReceiver(lockerId, code);
+    @PutMapping("/public/pick-up/locker/{lockerId}/code/")
+    public ResponseEntity<SendLockerCodeResponse> pickedUpParcelByReceiver(@PathVariable Long lockerId, @RequestBody SendLockerCodeRequest request) {
+        Parcel parcel = parcelService.pickedUpParcelByReceiver(lockerId, request.getCode());
         Boolean isOpen = parcel != null ? true : false;
-        return new ResponseEntity<>(isOpen, HttpStatus.OK);
+        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, isOpen);
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @PutMapping("/assign-all-to-drivers")

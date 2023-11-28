@@ -56,7 +56,7 @@ public class SecurityConfig {
         .requestMatchers("/api/lockers/**").permitAll()
         .requestMatchers("/api/cabinets/**").permitAll()
         .requestMatchers("/api/users/forgotPassword").permitAll()
-        .requestMatchers("/api/parcels/unsecure/**").permitAll()
+        .requestMatchers("/api/parcels/public/**").permitAll()
         .anyRequest().authenticated()
         .and()
         .addFilterBefore(exceptionFilter, authenticationFilter.getClass())
