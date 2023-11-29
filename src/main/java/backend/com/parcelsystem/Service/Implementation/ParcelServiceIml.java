@@ -142,6 +142,7 @@ public class ParcelServiceIml implements ParcelService {
             // this case means that the sender drops off the parcel
             parcel.setStatus(ParcelStatus.WAITING_FOR_DRIVER);
             parcel.setSendDateSender(LocalDateTime.now());
+            parcelRepository.save(parcel);
 
         } else  if (parcel.getStatus().equals(ParcelStatus.IN_DELIVERY)) {
 
@@ -150,9 +151,10 @@ public class ParcelServiceIml implements ParcelService {
             parcel.setSendDateDriver(LocalDateTime.now());
             parcel.setPickupAvailability(true);
             parcel.setPickupExpiry(LocalDateTime.now().plusDays(10));
+            parcelRepository.save(parcel);
         }
 
-        parcel = parcelRepository.save(parcel);
+        // parcel = parcelRepository.save(parcel);
         
         // TODOS -> if sender drops off -> send to notification to the receiver (note -> exclude the code from the notification for receiver) 
         // TODOS -> if driver drops off -> send to notification to the receiver (note -> include the code in the notification for receiver) 
