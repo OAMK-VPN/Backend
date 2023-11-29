@@ -19,7 +19,11 @@ public class ParcelMapper {
 
     public ParcelResponse mapParcelToResponseForReceiver(Parcel parcel) {
         People receiver = new People(parcel.getReceiver().getUser().getFullname(), parcel.getReceiver().getUser().getCity());
-        People sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
+        People sender = null;
+        if(parcel.getSender() != null) {
+            sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
+        }
+        
 
         Cabinet cabinet;
         CabinetResponse cabinetRes = null;
