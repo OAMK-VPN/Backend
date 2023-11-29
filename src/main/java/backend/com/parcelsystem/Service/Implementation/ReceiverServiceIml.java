@@ -1,5 +1,6 @@
 package backend.com.parcelsystem.Service.Implementation;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,10 @@ public class ReceiverServiceIml implements ReceiverService {
             Receiver receiver = entity.get();
             return receiver;
         }
+    }
+
+    @Override
+    public List<Receiver> getByCity(String city) {
+        return receiverRepos.findReceiversByCity(city);
     }
 }

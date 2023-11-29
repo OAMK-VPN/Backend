@@ -35,7 +35,7 @@ public class ParcelsystemApplication {
 		SpringApplication.run(ParcelsystemApplication.class, args);
 	}
 
-	// @Bean
+	@Bean
 	CommandLineRunner commandLineRunner(UserRepos userRepos, SampleGenerator sampleGenerator, DriverRepos driverRepos,
 			ReceiverRepos receiverRepos, SenderRepos senderRepos, ParcelRepos parcelRepos, CodeRepos codeRepos,
 			LockerRepos lockerRepos, CabinetRepos cabinetRepos) {

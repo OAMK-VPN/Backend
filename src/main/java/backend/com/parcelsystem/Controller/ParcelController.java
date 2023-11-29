@@ -71,7 +71,7 @@ public class ParcelController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    @GetMapping("/unsecure/tracking/{trackingNumber}")
+    @GetMapping("/public/tracking/{trackingNumber}")
     public ResponseEntity<ParcelResponse> trackingParcel(@PathVariable String trackingNumber) {
         Parcel parcel = parcelService.trackingParcel(trackingNumber);
         ParcelResponse res = parcelMapper.mapParcelToResponseForTrackingNumber(parcel);
@@ -97,6 +97,7 @@ public class ParcelController {
 
     @PutMapping("/public/pick-up/locker/{lockerId}/code/")
     public ResponseEntity<SendLockerCodeResponse> pickedUpParcelByReceiver(@PathVariable Long lockerId, @RequestBody SendLockerCodeRequest request) {
+        System.out.println("pick-up parcel");
         Parcel parcel = parcelService.pickedUpParcelByReceiver(lockerId, request.getCode());
         Boolean isOpen = parcel != null ? true : false;
         SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, isOpen);
@@ -104,21 +105,34 @@ public class ParcelController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // testing for cronJob
     @PutMapping("/assign-all-to-drivers")
     public ResponseEntity<List<Parcel>> assignAllParcelsToDrivers() {
         List<Parcel> parcels = parcelService.assignAllParcelsToDrivers();
         return new ResponseEntity<>(parcels, HttpStatus.OK);
     }
 
+     // testing for cronJob
     @PutMapping("/check-pickup-expired")
     public ResponseEntity<List<Parcel>> checkAllPickupExpiredParcels() {
         List<Parcel> parcels = parcelService.CheckAllPickupExpiredParcels();
         return new ResponseEntity<>(parcels, HttpStatus.OK);
     }
 
+     // testing for cronJob
     @PutMapping("/check-send-expired")
     public ResponseEntity<List<Parcel>> checkAllSendExpiredParcels() {
         List<Parcel> parcels = parcelService.CheckAllSendExpiredParcels();
         return new ResponseEntity<>(parcels, HttpStatus.OK);
+    }
+
+     // testing for cronJob
+    @GetMapping("/robot-generating")
+    public ResponseEntity<List<ParcelResponse>> getAllParcelsGeneratedByRobot() {
+        List<Parcel> parcels = parcelService.generateParcelsAndSendToDriversByRobot();
+        List<ParcelResponse> res = parcels.stream()
+        .map(parcel -> parcelMapper.mapParcelToResponseForReceiver(parcel))
+        .collect(Collectors.toList());
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

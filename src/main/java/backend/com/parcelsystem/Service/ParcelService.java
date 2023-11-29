@@ -46,6 +46,6 @@ public interface ParcelService {
 
     // do cronjob
     // do later after testing all other controllers
-    List<Parcel> generateParcelsAndSendToDrivers();
+    List<Parcel> generateParcelsAndSendToDriversByRobot();
 
 }

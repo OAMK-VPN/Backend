@@ -65,6 +65,13 @@ public class CabinetServiceIml implements CabinetService {
         Locker locker = lockerService.getById(lockerId);
         // verify the code in the list of locker coders to find correct cabinet
         Cabinet cabinet = checkCodeToFindCabinet(locker, code);
+        
+        // fix the logic for wrong code
+        if(cabinet == null) {
+            return null;
+        }
+
+
         System.out.println(cabinet);
         
         //update new code for the cabinet
@@ -116,7 +123,8 @@ public class CabinetServiceIml implements CabinetService {
         }
 
         if(correctCode == null) {
-            throw new BadResultException("the code is not correct");
+            // throw new BadResultException("the code is not correct");
+            return null;
         } else {
             return correctCode.getCabinet();
         }

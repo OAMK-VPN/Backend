@@ -46,8 +46,8 @@ public class DataLoader implements CommandLineRunner {
                 objectMapper.getTypeFactory().constructCollectionType(List.class, Locker.class));
 
         // Save data to the database
-        // parcelLockerRepository.saveAll(parcelLockers);
-        // generateAndSaveRandomCabinets();
+        parcelLockerRepository.saveAll(parcelLockers);
+        generateAndSaveRandomCabinets();
 
     }
 
