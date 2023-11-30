@@ -22,9 +22,11 @@ import backend.com.parcelsystem.Models.Driver;
 import backend.com.parcelsystem.Models.Parcel;
 import backend.com.parcelsystem.Models.Receiver;
 import backend.com.parcelsystem.Models.Sender;
+import backend.com.parcelsystem.Models.Users;
 import backend.com.parcelsystem.Models.Enums.ParcelStatus;
 import backend.com.parcelsystem.Models.Request.ParcelRequest;
 import backend.com.parcelsystem.Repository.ParcelRepos;
+import backend.com.parcelsystem.Repository.SenderRepos;
 import backend.com.parcelsystem.Service.CabinetService;
 import backend.com.parcelsystem.Service.CityService;
 import backend.com.parcelsystem.Service.DriverService;
@@ -51,6 +53,9 @@ public class ParcelServiceIml implements ParcelService {
     
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private SenderRepos senderRepos;
 
     @Override
     public Parcel buyParcel(ParcelRequest req) {
@@ -410,6 +415,9 @@ public List<Parcel> assignAllParcelsToDrivers() {
     private Parcel createParcelByRobot(Cabinet emptyCabinet, Driver driver, Receiver receiver, City city) {
         // create new parcel;
         Parcel parcel = new Parcel();
+        Driver robot= driverService.getDriverByemail("robot@gmail.com");
+        Sender robotSender = new Sender(robot.getUser());
+        senderRepos.save(robotSender);
         
         // Assign the parcel to the driver, receiver and cabinet
         parcel.setTrackingNumber(generateTrackingNumber());
@@ -425,6 +433,7 @@ public List<Parcel> assignAllParcelsToDrivers() {
         parcel.setLength(emptyCabinet.getLength());
         parcel.setWeigh(emptyCabinet.getWeigh());
         parcel.setReceiveDateDriver(LocalDateTime.now());
+        parcel.setSender(robotSender);
 
 
         // Save the parcel to the database

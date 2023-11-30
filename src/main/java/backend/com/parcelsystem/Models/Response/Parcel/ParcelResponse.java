@@ -1,5 +1,6 @@
 package backend.com.parcelsystem.Models.Response.Parcel;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import backend.com.parcelsystem.Models.Enums.ParcelStatus;
@@ -29,6 +30,7 @@ public class ParcelResponse {
     private LocalDateTime sendDateSender;
     private LocalDateTime pickupDate;
     private boolean pickupAvailability;
+    private LocalDateTime sendDateDriver;
     private LocalDateTime receiveDateDriver;
     private LocalDateTime pickupExpiry;
     private LocalDateTime sendExpiry;
@@ -40,7 +42,7 @@ public class ParcelResponse {
             People sender, CabinetResponse cabinet, double weigh, double height, double width, double length,
             LocalDateTime sendDateSender, LocalDateTime pickupDate, boolean pickupAvailability,
             LocalDateTime receiveDateDriver, LocalDateTime pickupExpiry, LocalDateTime sendExpiry,
-            LocalDateTime dateCreated, LocalDateTime dateUpdated) {
+            LocalDateTime dateCreated, LocalDateTime dateUpdated, LocalDateTime sendDateDriver) {
         this.id = id;
         this.status = status;
         this.trackingNumber = trackingNumber;

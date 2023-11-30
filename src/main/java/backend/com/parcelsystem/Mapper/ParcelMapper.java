@@ -56,14 +56,17 @@ public class ParcelMapper {
                 parcel.getPickupExpiry(),
                 parcel.getSendExpiry(),
                 parcel.getDateCreated(),
-                parcel.getDateUpdated()
+                parcel.getDateUpdated(),
+                parcel.getSendDateDriver()
         );
     }
 
     public ParcelResponse mapParcelToResponseForSender(Parcel parcel) {
         People receiver = new People(parcel.getReceiver().getUser().getFullname(), parcel.getReceiver().getUser().getCity());
-        People sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
-
+        People sender = null;
+        if(parcel.getSender() != null) {
+            sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
+        }
         Cabinet cabinet;
         CabinetResponse cabinetRes = null;
         if(parcel.getCabinet() != null) {
@@ -95,13 +98,17 @@ public class ParcelMapper {
                 parcel.getPickupExpiry(),
                 parcel.getSendExpiry(),
                 parcel.getDateCreated(),
-                parcel.getDateUpdated()
+                parcel.getDateUpdated(),
+                parcel.getSendDateDriver()
         );
     }
 
      public ParcelResponse mapParcelToResponseForDriverApp(Parcel parcel) {
         People receiver = new People(parcel.getReceiver().getUser().getFullname(), parcel.getReceiver().getUser().getCity());
-        People sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
+        People sender = null;
+        if(parcel.getSender() != null) {
+            sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
+        }
         People driver = new People(parcel.getDriver().getUser().getFullname(), parcel.getDriver().getUser().getCity());
 
         Cabinet cabinet;
@@ -137,14 +144,17 @@ public class ParcelMapper {
                 parcel.getPickupExpiry(),
                 parcel.getSendExpiry(),
                 parcel.getDateCreated(),
-                parcel.getDateUpdated()
+                parcel.getDateUpdated(),
+                parcel.getSendDateDriver()
         );
     }
 
     public ParcelResponse mapParcelToResponseForParcelID(Parcel parcel, String role) {
         People receiver = new People(parcel.getReceiver().getUser().getFullname(), parcel.getReceiver().getUser().getCity());
-        People sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
-
+        People sender = null;
+        if(parcel.getSender() != null) {
+            sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
+        }
         Cabinet cabinet;
         CabinetResponse cabinetRes = null;
         if(parcel.getCabinet() != null) {
@@ -181,13 +191,17 @@ public class ParcelMapper {
                 parcel.getPickupExpiry(),
                 parcel.getSendExpiry(),
                 parcel.getDateCreated(),
-                parcel.getDateUpdated()
+                parcel.getDateUpdated(),
+                parcel.getSendDateDriver()
         );
     }
 
     public ParcelResponse mapParcelToResponseForTrackingNumber(Parcel parcel) {
         People receiver = new People(parcel.getReceiver().getUser().getFullname(), parcel.getReceiver().getUser().getCity());
-        People sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
+         People sender = null;
+        if(parcel.getSender() != null) {
+            sender = new People(parcel.getSender().getUser().getFullname(), parcel.getSender().getUser().getCity());
+        }
         Cabinet cabinet;
         CabinetResponse cabinetRes = null;
         if(parcel.getCabinet() != null) {
@@ -217,7 +231,8 @@ public class ParcelMapper {
                 parcel.getPickupExpiry(),
                 parcel.getSendExpiry(),
                 parcel.getDateCreated(),
-                parcel.getDateUpdated()
+                parcel.getDateUpdated(),
+                parcel.getSendDateDriver()
         );
     }
 }

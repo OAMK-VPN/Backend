@@ -50,6 +50,13 @@ public class ParcelsystemApplication {
 			Users kwang = sampleGenerator.generateUser("kwang", "kwang@gmail.com", "kwang", "HELSINKI", "kalteentie 2",
 					"00770");
 
+			Users robot = sampleGenerator.generateUser("robot", "robot@gmail.com", "robot", "HELSINKI", "kalteentie 2",
+					"00770");		
+			
+			Driver robotdriver = new Driver(robot);
+			driverRepos.findByUser(robot).orElseGet(() -> driverRepos.save(robotdriver));
+
+
 			Driver Kwangdriver = new Driver(kwang);
 			driverRepos.findByUser(kwang).orElseGet(() -> driverRepos.save(Kwangdriver));
 
