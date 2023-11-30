@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -11,6 +12,7 @@ import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
+@Component
 @Entity(name = "Notification")
 @Table(name = "notification")
 @NoArgsConstructor
@@ -23,32 +25,20 @@ public class Notification {
     @Column(name = "id", updatable = false)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "receiver_id", referencedColumnName = "id")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "receiverId", referencedColumnName = "id")
     private Receiver receiver;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "sender_id", referencedColumnName = "id")
     private Sender sender;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "driver_id", referencedColumnName = "id")
     private Driver driver;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "parcel_id", referencedColumnName = "id")
-    private Parcel parcel;
-
-    @NotBlank(message = "message cannot be blank")
-    @Column(name = "message")
-    private String message;
 
     @Column(name = "read")
-    private boolean read;
+    private boolean isRead;
 
-    @NotBlank(message = "code cannot be blank")
-    @Column(name = "code")
-    private String code;
 
     @CreationTimestamp
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")

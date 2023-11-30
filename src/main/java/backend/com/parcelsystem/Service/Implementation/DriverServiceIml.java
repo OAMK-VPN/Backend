@@ -45,6 +45,19 @@ public class DriverServiceIml implements DriverService {
     }
 
     @Override
+    public Driver getDriverByemail(String email) {
+         Users user = userService.getUserByEmail(email);
+        Optional<Driver> entity = driverRepos.findByUser(user);
+        if(!entity.isPresent()) {
+            Driver driver = new Driver(user);
+            return driverRepos.save(driver);
+        } else {
+            Driver driver = entity.get();
+            return driver;
+        }
+    }
+
+    @Override
     public List<Driver> getDriversByCity(String city) {
         return driverRepos.findDriversByCity(city.toUpperCase());
     }

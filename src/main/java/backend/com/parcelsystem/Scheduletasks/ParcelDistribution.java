@@ -25,9 +25,9 @@ public class ParcelDistribution {
 
     // @Scheduled(cron = "0 0 3 * * *") // Run at 3 am every day
     // public void generateParcelsJob() {
-    //     parcelService.assignAllParcelsToDrivers();
     //     parcelService.CheckAllSendExpiredParcels();
     //     parcelService.CheckAllPickupExpiredParcels();
+    //     parcelService.assignAllParcelsToDrivers();
     //     parcelService.generateParcelsAndSendToDriversByRobot();
     // }
 }

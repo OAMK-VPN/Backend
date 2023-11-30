@@ -22,15 +22,19 @@ import backend.com.parcelsystem.Models.Driver;
 import backend.com.parcelsystem.Models.Parcel;
 import backend.com.parcelsystem.Models.Receiver;
 import backend.com.parcelsystem.Models.Sender;
+import backend.com.parcelsystem.Models.Users;
 import backend.com.parcelsystem.Models.Enums.ParcelStatus;
 import backend.com.parcelsystem.Models.Request.ParcelRequest;
 import backend.com.parcelsystem.Repository.ParcelRepos;
+import backend.com.parcelsystem.Repository.SenderRepos;
 import backend.com.parcelsystem.Service.CabinetService;
 import backend.com.parcelsystem.Service.CityService;
 import backend.com.parcelsystem.Service.DriverService;
 import backend.com.parcelsystem.Service.ParcelService;
 import backend.com.parcelsystem.Service.ReceiverService;
 import backend.com.parcelsystem.Service.SenderService;
+import backend.com.parcelsystem.Service.NotificationService;
+
 
 @Service
 public class ParcelServiceIml implements ParcelService {
@@ -51,6 +55,13 @@ public class ParcelServiceIml implements ParcelService {
     
     @Autowired
     private CityService cityService;
+
+    @Autowired
+    private SenderRepos senderRepos;
+
+    @Autowired
+    private NotificationService notificationService;
+    
 
     @Override
     public Parcel buyParcel(ParcelRequest req) {
@@ -83,8 +94,7 @@ public class ParcelServiceIml implements ParcelService {
         parcelRepository.save(parcel);
 
         //send the notification here
-        // TODOS -> send notification to the receiver (excludes the code from the notification). 
-        // TODOS -> Send notification to sender contains the parcel, the cabinet, the locker, the code to open cabinet in order that the sender can drop the parcel into the cabinet (include the code in notification for sender)
+        notificationService.sendNotification(parcel);
 
         return parcel;
     }
@@ -155,10 +165,10 @@ public class ParcelServiceIml implements ParcelService {
         }
 
         // parcel = parcelRepository.save(parcel);
+
+        notificationService.sendNotification(parcel);
         
-        // TODOS -> if sender drops off -> send to notification to the receiver (note -> exclude the code from the notification for receiver) 
-        // TODOS -> if driver drops off -> send to notification to the receiver (note -> include the code in the notification for receiver) 
-        // TODOS send to notification  to the sender (note -> exclude the code from the notification for sender)
+          
 
         return parcel;
     }
@@ -191,8 +201,8 @@ public class ParcelServiceIml implements ParcelService {
         // update the cabinet, set empty status by true, set isFilled by false
         cabinetService.updateCabinetAfterBeingPickedupOrderDropOff(cabinet, true, false);
 
-        // TODOS ->  send to notification to the receiver (note -> exclude the code from the notification for receiver) 
-        // TODOS ->  send to notification to the sender (note -> exclude the code from the notification for receiver) 
+        
+        notificationService.sendNotification(parcel);
 
         return parcel;
     }
@@ -233,11 +243,10 @@ public class ParcelServiceIml implements ParcelService {
         parcel.setDriver(driver);
         parcel.setStatus(ParcelStatus.IN_DELIVERY);
         parcel.setReceiveDateDriver(LocalDateTime.now());
-        return parcelRepository.save(parcel);
+        
+        notificationService.sendNotification(parcel);
 
-        // TODOS ->  send to notification to the receiver (note -> exclude the code from the notification for receiver) 
-        // TODOS ->  send to notification to the sender (note -> exclude the code from the notification for receiver) 
-        // TODOS ->  in the driver app, all parcel shows the code, do not need the notification
+        return parcelRepository.save(parcel);
     }
 
 
@@ -410,6 +419,9 @@ public List<Parcel> assignAllParcelsToDrivers() {
     private Parcel createParcelByRobot(Cabinet emptyCabinet, Driver driver, Receiver receiver, City city) {
         // create new parcel;
         Parcel parcel = new Parcel();
+        Driver robot= driverService.getDriverByemail("robot@gmail.com");
+        Sender robotSender = new Sender(robot.getUser());
+        senderRepos.save(robotSender);
         
         // Assign the parcel to the driver, receiver and cabinet
         parcel.setTrackingNumber(generateTrackingNumber());
@@ -425,6 +437,7 @@ public List<Parcel> assignAllParcelsToDrivers() {
         parcel.setLength(emptyCabinet.getLength());
         parcel.setWeigh(emptyCabinet.getWeigh());
         parcel.setReceiveDateDriver(LocalDateTime.now());
+        parcel.setSender(robotSender);
 
 
         // Save the parcel to the database
