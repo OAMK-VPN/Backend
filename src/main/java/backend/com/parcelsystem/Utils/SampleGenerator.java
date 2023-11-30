@@ -21,7 +21,7 @@ public class SampleGenerator {
         user.getRoles().add(Role.USER);
         user.setActive(true);
         
-        userRepos.save(user);
-        return user;
+        Users result = userRepos.findByEmail(user.getEmail()).orElseGet(() -> userRepos.save(user));
+        return result;
     }
 }

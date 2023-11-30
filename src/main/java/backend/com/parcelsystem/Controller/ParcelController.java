@@ -18,8 +18,11 @@ import backend.com.parcelsystem.Mapper.ParcelMapper;
 import backend.com.parcelsystem.Models.Parcel;
 import backend.com.parcelsystem.Models.Enums.ParcelStatus;
 import backend.com.parcelsystem.Models.Request.ParcelRequest;
+import backend.com.parcelsystem.Models.Request.SendLockerCodeRequest;
+import backend.com.parcelsystem.Models.Response.Locker.SendLockerCodeResponse;
 import backend.com.parcelsystem.Models.Response.Parcel.ParcelResponse;
 import backend.com.parcelsystem.Service.ParcelService;
+import org.springframework.http.MediaType;
 
 @RestController
 @RequestMapping("/api/parcels")
@@ -68,7 +71,7 @@ public class ParcelController {
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
 
-    @GetMapping("/unsecure/tracking/{trackingNumber}")
+    @GetMapping("/public/tracking/{trackingNumber}")
     public ResponseEntity<ParcelResponse> trackingParcel(@PathVariable String trackingNumber) {
         Parcel parcel = parcelService.trackingParcel(trackingNumber);
         ParcelResponse res = parcelMapper.mapParcelToResponseForTrackingNumber(parcel);
@@ -82,35 +85,54 @@ public class ParcelController {
         return new ResponseEntity<>(res, HttpStatus.CREATED);
     }
 
-    @PutMapping("/unsecure/drop-off/locker/{lockerId}/code/{code}")
-    public ResponseEntity<Boolean> dropOffParcelIntoCabinet(@PathVariable Long lockerId, @PathVariable String code) {
-        Parcel parcel = parcelService.dropOffParcelIntoCabinet(lockerId, code);
+    @PutMapping("/public/drop-off/locker/{lockerId}/code/")
+    public ResponseEntity<SendLockerCodeResponse> dropOffParcelIntoCabinet(@PathVariable Long lockerId,
+            @RequestBody SendLockerCodeRequest request) {
+        Parcel parcel = parcelService.dropOffParcelIntoCabinet(lockerId, request.getCode());
         Boolean isOpen = parcel != null ? true : false;
-        return new ResponseEntity<>(isOpen, HttpStatus.OK);
+        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, isOpen);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
-    @PutMapping("/unsecure/picked-up/locker/{lockerId}/code/{code}")
-    public ResponseEntity<Boolean> pickedUpParcelByReceiver(@PathVariable Long lockerId, @PathVariable String code) {
-        Parcel parcel = parcelService.pickedUpParcelByReceiver(lockerId, code);
+    @PutMapping("/public/pick-up/locker/{lockerId}/code/")
+    public ResponseEntity<SendLockerCodeResponse> pickedUpParcelByReceiver(@PathVariable Long lockerId, @RequestBody SendLockerCodeRequest request) {
+        System.out.println("pick-up parcel");
+        Parcel parcel = parcelService.pickedUpParcelByReceiver(lockerId, request.getCode());
         Boolean isOpen = parcel != null ? true : false;
-        return new ResponseEntity<>(isOpen, HttpStatus.OK);
+        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, isOpen);
+        
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    // testing for cronJob
     @PutMapping("/assign-all-to-drivers")
     public ResponseEntity<List<Parcel>> assignAllParcelsToDrivers() {
         List<Parcel> parcels = parcelService.assignAllParcelsToDrivers();
         return new ResponseEntity<>(parcels, HttpStatus.OK);
     }
 
+     // testing for cronJob
     @PutMapping("/check-pickup-expired")
     public ResponseEntity<List<Parcel>> checkAllPickupExpiredParcels() {
         List<Parcel> parcels = parcelService.CheckAllPickupExpiredParcels();
         return new ResponseEntity<>(parcels, HttpStatus.OK);
     }
 
+     // testing for cronJob
     @PutMapping("/check-send-expired")
     public ResponseEntity<List<Parcel>> checkAllSendExpiredParcels() {
         List<Parcel> parcels = parcelService.CheckAllSendExpiredParcels();
         return new ResponseEntity<>(parcels, HttpStatus.OK);
+    }
+
+     // testing for cronJob
+    @GetMapping("/robot-generating")
+    public ResponseEntity<List<ParcelResponse>> getAllParcelsGeneratedByRobot() {
+        List<Parcel> parcels = parcelService.generateParcelsAndSendToDriversByRobot();
+        List<ParcelResponse> res = parcels.stream()
+        .map(parcel -> parcelMapper.mapParcelToResponseForReceiver(parcel))
+        .collect(Collectors.toList());
+        return new ResponseEntity<>(res, HttpStatus.OK);
     }
 }

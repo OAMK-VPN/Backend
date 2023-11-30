@@ -20,7 +20,7 @@ public class Sender {
     private Long id;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH, CascadeType.REMOVE})
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id", unique = true)
     private Users user;
 
     @JsonIgnore

@@ -15,13 +15,13 @@ import backend.com.parcelsystem.Service.LockerService;
 @RestController
 @RequestMapping("/api/lockers")
 public class LockerController {
-     private final LockerService lockerService;
+    private final LockerService lockerService;
 
     public LockerController(LockerService lockerService) {
         this.lockerService = lockerService;
     }
 
-     @GetMapping("/")
+    @GetMapping("/")
     public ResponseEntity<List<Locker>> getAllLockers() {
         List<Locker> lockers = lockerService.getAll();
         return new ResponseEntity<>(lockers, HttpStatus.OK);

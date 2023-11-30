@@ -35,45 +35,41 @@ public class ParcelsystemApplication {
 		SpringApplication.run(ParcelsystemApplication.class, args);
 	}
 
-		@Bean
-	CommandLineRunner commandLineRunner(UserRepos userRepos, SampleGenerator sampleGenerator, DriverRepos driverRepos, ReceiverRepos receiverRepos, SenderRepos senderRepos, ParcelRepos parcelRepos, CodeRepos codeRepos, LockerRepos lockerRepos, CabinetRepos cabinetRepos) {
+	@Bean
+	CommandLineRunner commandLineRunner(UserRepos userRepos, SampleGenerator sampleGenerator, DriverRepos driverRepos,
+			ReceiverRepos receiverRepos, SenderRepos senderRepos, ParcelRepos parcelRepos, CodeRepos codeRepos,
+			LockerRepos lockerRepos, CabinetRepos cabinetRepos) {
 		return args -> {
-			
-			
-			Users quan = sampleGenerator.generateUser("quan", "quan@gmail.com", "Quan Doan", "OULU", "yliopistokatu 2", "90570");
 
+			Users quan = sampleGenerator.generateUser("quan", "quan@gmail.com", "Quan Doan", "OULU", "yliopistokatu 2",
+					"90570");
+			Users Peter = sampleGenerator.generateUser("peter", "peter@gmail.com", "Peter senull00", "OULU", "Tehtaankatu 3",
+					"90130");
+			Users hang = sampleGenerator.generateUser("hang", "hang@gmail.com", "hang", "HELSINKI", "Malminkaari 19",
+					"00700");
+			Users kwang = sampleGenerator.generateUser("kwang", "kwang@gmail.com", "kwang", "HELSINKI", "kalteentie 2",
+					"00770");
 
-			Users Peter = sampleGenerator.generateUser("peter", "peter@gmail.com", "Peter senull00", "OULU", "Tehtaankatu 3", "90130");
-
-			Users hang = sampleGenerator.generateUser("hang", "hang@gmail.com", "hang", "HELSINKI", "Malminkaari 19", "00700");
-
-			Users kwang = sampleGenerator.generateUser("kwang", "kwang@gmail.com", "kwang", "HELSINKI", "kalteentie 2", "00770");
-
-			Driver Kwangdriver =  new Driver(kwang);
-			driverRepos.save(Kwangdriver);
+			Driver Kwangdriver = new Driver(kwang);
+			driverRepos.findByUser(kwang).orElseGet(() -> driverRepos.save(Kwangdriver));
 
 			Sender peterCustomer = new Sender(Peter);
-			senderRepos.save(peterCustomer);
-
+			senderRepos.findByUser(Peter).orElseGet(() -> senderRepos.save(peterCustomer));
 
 			Receiver hangReceiver = new Receiver(hang);
-			receiverRepos.save(hangReceiver);
+			receiverRepos.findByUser(hang).orElseGet(() -> receiverRepos.save(hangReceiver));
 
-
-			// Parcel parcel = new Parcel(UUID.randomUUID().toString(), ParcelStatus.IN_DELIVERY, "HELSINKI" ,"Kalteentie 2", "00770", hangReceiver, peterCustomer, 5, 0.4, 0.4);
+			// Parcel parcel = new Parcel(UUID.randomUUID().toString(),
+			// ParcelStatus.IN_DELIVERY, "HELSINKI" ,"Kalteentie 2", "00770", hangReceiver,
+			// peterCustomer, 5, 0.4, 0.4);
 			// parcel.setDriver(Kwangdriver);
 			// Optional<Cabinet> cabinetEntity = cabinetRepos.findById(187L);
 			// Cabinet cabinet = cabinetEntity.get();
 
 			// parcel.setCabinet(cabinet);
 			// parcel.setPickupAvailability(false);
-			
+
 			// parcelRepos.save(parcel);
-
-			
-
-			
-
 
 		};
 	}

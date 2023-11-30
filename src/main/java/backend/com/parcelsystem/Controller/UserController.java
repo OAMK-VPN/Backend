@@ -42,6 +42,7 @@ public class UserController {
         UserResponse res = userMapper.mapUserToResponse(userService.getUserById(id));
         return new ResponseEntity<UserResponse>(res, HttpStatus.OK);
     }
+    // post method
     @PutMapping("/signIn")
     public ResponseEntity<AuthResponse> signIn(@Valid @RequestBody UserSignIn userSignIn) {
         return new ResponseEntity<AuthResponse>(userService.signIn(userSignIn, false), HttpStatus.OK);

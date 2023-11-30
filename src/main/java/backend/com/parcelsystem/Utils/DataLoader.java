@@ -1,7 +1,9 @@
 package backend.com.parcelsystem.Utils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -33,29 +35,32 @@ public class DataLoader implements CommandLineRunner {
     CabinetRepos cabinetRepos;
     @Autowired
     CityRepos cityRepos;
-    
-    
+
     @Override
     public void run(String... args) throws Exception {
         // Read JSON data from file
         ObjectMapper objectMapper = new ObjectMapper();
+<<<<<<< HEAD
         List<Locker> parcelLockers = objectMapper.readValue(new File("src/main/java/backend/com/parcelsystem/Utils/PostNordLocation.json"),
+=======
+        File locationFilePath = ResourceUtils.getFile("classpath:PostnordLocation.json");
+
+        List<Locker> parcelLockers = objectMapper.readValue(locationFilePath,
+>>>>>>> 465284cc5f50f6df9661d1425837233d54491efd
                 objectMapper.getTypeFactory().constructCollectionType(List.class, Locker.class));
 
         // Save data to the database
         parcelLockerRepository.saveAll(parcelLockers);
-        generateAndSaveRandomCabinets(); 
-    
-    }
+        generateAndSaveRandomCabinets();
 
-    
+    }
 
     private void generateAndSaveRandomCabinets() {
         List<Locker> parcelLockers = parcelLockerRepository.findAll();
 
         for (Locker parcelLocker : parcelLockers) {
             // add city to the database
-            if(!cityRepos.existsByName(parcelLocker.getCity())) {
+            if (!cityRepos.existsByName(parcelLocker.getCity())) {
                 cityRepos.save(new City(parcelLocker.getCity()));
             }
 
@@ -71,7 +76,7 @@ public class DataLoader implements CommandLineRunner {
                 cabinet.setLocker(parcelLocker);
                 cabinet.setEmpty(true);
                 cabinet.setFilled(false);
-                
+
                 // Save cabinet
                 cabinetRepos.save(cabinet);
                 cabinets.add(cabinet);
@@ -106,9 +111,8 @@ public class DataLoader implements CommandLineRunner {
         return (0.3 + new Random().nextDouble() * 0.2); // Random width between 0.3 and 0.5 m
     }
 
-     private double generateRandomLength() {
+    private double generateRandomLength() {
         return (0.3 + new Random().nextDouble() * 0.2); // Random width between 0.3 and 0.5 m
     }
 
-    
 }

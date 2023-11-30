@@ -1,6 +1,4 @@
 [
-    
-    
     {
       "name": "Postnord Lähiboksi Prisma Limingantulli",
       "address": "Nuottasaarentie 1",
@@ -57,6 +55,5 @@
         "city": "HELSINKI",
         "totalCabinets": 20
     }
-   
-    
+  
 ] 

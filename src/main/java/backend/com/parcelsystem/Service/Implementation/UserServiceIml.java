@@ -169,8 +169,9 @@ public class UserServiceIml implements UserService, UserDetailsService {
 
     @Override
     public AuthResponse signIn(UserSignIn userSignIn, boolean isDriver) {
-       
+        System.out.println(userSignIn.getEmail());
         Optional<Users> entity = userRepos.findByEmail(userSignIn.getEmail());
+        
         if(!entity.isPresent()) {
            throw new EntityNotFoundException("the email not found");
         }

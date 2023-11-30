@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -120,6 +121,10 @@ public class ParcelServiceIml implements ParcelService {
         // find the cabinet of locker and code. then update the cabinet code and filled status
         Cabinet cabinet = cabinetService.checkAndUpdateCodeByLockerAndCode(lockerId, code);
 
+        if (cabinet == null) {
+            return null;
+        }
+
         // update the cabinet, set empty status by false, set isFilled by true
         cabinetService.updateCabinetAfterBeingPickedupOrderDropOff(cabinet, false, true);
 
@@ -137,6 +142,7 @@ public class ParcelServiceIml implements ParcelService {
             // this case means that the sender drops off the parcel
             parcel.setStatus(ParcelStatus.WAITING_FOR_DRIVER);
             parcel.setSendDateSender(LocalDateTime.now());
+            parcelRepository.save(parcel);
 
         } else  if (parcel.getStatus().equals(ParcelStatus.IN_DELIVERY)) {
 
@@ -145,9 +151,10 @@ public class ParcelServiceIml implements ParcelService {
             parcel.setSendDateDriver(LocalDateTime.now());
             parcel.setPickupAvailability(true);
             parcel.setPickupExpiry(LocalDateTime.now().plusDays(10));
+            parcelRepository.save(parcel);
         }
 
-        parcel = parcelRepository.save(parcel);
+        // parcel = parcelRepository.save(parcel);
         
         // TODOS -> if sender drops off -> send to notification to the receiver (note -> exclude the code from the notification for receiver) 
         // TODOS -> if driver drops off -> send to notification to the receiver (note -> include the code in the notification for receiver) 
@@ -162,6 +169,10 @@ public class ParcelServiceIml implements ParcelService {
     public Parcel pickedUpParcelByReceiver(Long lockerId, String code) {
         // find the cabinet of locker and code. then update the cabinet code and filled status
         Cabinet cabinet = cabinetService.checkAndUpdateCodeByLockerAndCode(lockerId, code);
+
+        if (cabinet == null) {
+            return null;
+        }
 
         // find the parcel by current cabinet
         List<Parcel> parcels = parcelRepository.findByCabinet(cabinet);
@@ -229,40 +240,6 @@ public class ParcelServiceIml implements ParcelService {
         // TODOS ->  in the driver app, all parcel shows the code, do not need the notification
     }
 
-    // @Override
-    // public List<Parcel> assignAllParcelsToDrivers() {
-    //     assignAllParcelsToNewCabinets();
-
-    //     // get the list of cities
-    //     List<City> cities = cityService.getAll();
-        
-    //     // create empty list to store parcels after being assigned to new cabinets and drivers
-    //     List<Parcel> assignedParcels = new ArrayList<>();
-
-    //     // loop through each city -> get list of drivers and parcels in the same city -> group parcels and drivers by the same city -> divides the number of parcels equally to each driver in the same city 
-    //     for (City city : cities) {
-    //         List<Parcel> parcels = getAllByCityAndStatus(city.getName(), ParcelStatus.ASSIGNING_NEW_CABINET_FOR_PICKUP);
-    //         List<Driver> drivers = driverService.getDriversByCity(city.getName());
-    //         int equalNumber = (int) Math.floor(parcels.size() / drivers.size());
-    //         int leftNumber = parcels.size() % drivers.size();
-    //         int indexNumber = 0;
-
-    //         for(Driver driver: drivers) {
-    //             int numberOfAssignedParcels = equalNumber + (leftNumber > 0 ? 1 : 0);
-    //             leftNumber = leftNumber > 0 ? leftNumber-- : 0;
-
-    //             for(int i = 0; i < numberOfAssignedParcels; i++) {
-    //                 Parcel parcel = parcels.get(indexNumber);
-    //                 indexNumber++;
-                    
-    //                 // assigned the parcel to the driver
-    //                 parcel = assignParcelToDriver(parcel, driver);
-    //                 assignedParcels.add(parcel);
-    //             }
-    //         }
-    //     }
-    //     return assignedParcels;
-    // }
 
     @Override
 public List<Parcel> assignAllParcelsToDrivers() {
@@ -405,20 +382,55 @@ public List<Parcel> assignAllParcelsToDrivers() {
     }
 
     @Override
-    public List<Parcel> generateParcelsAndSendToDrivers() {
-        List<Cabinet> emptyCabinets = cabinetService.getEmptyCabinets();
-        int halfOfEmptyCabinets = emptyCabinets.size() / 2;
+    public List<Parcel> generateParcelsAndSendToDriversByRobot() {
+        List<City> cities = cityService.getAll();
+        List<Parcel> generatedParcels = new ArrayList<>();
 
-        for(int i = 0; i < halfOfEmptyCabinets; i++) {
-
+        for(City city: cities) {
+            List<Cabinet> emptyCabinets = cabinetService.getEmptyCabinetsByCity(city.getName());
+            List<Driver> drivers = driverService.getDriversByCity(city.getName());
+            List<Receiver> receivers = receiverService.getByCity(city.getName());
+            if(drivers.size() > 0 && emptyCabinets.size() > 0 && receivers.size() > 0) {
+                for (int i = 0; i < Math.min(drivers.size(), Math.min(emptyCabinets.size(), receivers.size())); i++) {
+                    Cabinet emptyCabinet = emptyCabinets.get(i);
+                    Driver driver = drivers.get(i);
+                    Receiver receiver = receivers.get(i);
+                    if(receiver.getUser().getId() != driver.getUser().getId()) {
+                        // create new parcel;
+                        Parcel parcel = createParcelByRobot(emptyCabinet, driver, receiver, city);
+                        generatedParcels.add(parcel);
+                    }
+                }
+            }
         }
 
-        return null;
+        return generatedParcels;
     }
 
-    private Parcel createParcelByRobot(Cabinet cabinet) {
-
+    private Parcel createParcelByRobot(Cabinet emptyCabinet, Driver driver, Receiver receiver, City city) {
+        // create new parcel;
+        Parcel parcel = new Parcel();
         
-        return null;
+        // Assign the parcel to the driver, receiver and cabinet
+        parcel.setTrackingNumber(generateTrackingNumber());
+        parcel.setDriver(driver);
+        parcel.setReceiver(receiver);
+        parcel.setCabinet(emptyCabinet);
+        parcel.setStatus(ParcelStatus.IN_DELIVERY);
+        parcel.setCity(city.getName());
+        parcel.setAddress(receiver.getUser().getAddress());
+        parcel.setZipcode(receiver.getUser().getZipcode());
+        parcel.setWidth(emptyCabinet.getWidth());
+        parcel.setHeigh(emptyCabinet.getHeigh());
+        parcel.setLength(emptyCabinet.getLength());
+        parcel.setWeigh(emptyCabinet.getWeigh());
+        parcel.setReceiveDateDriver(LocalDateTime.now());
+
+
+        // Save the parcel to the database
+        Parcel savedParcel = parcelRepository.save(parcel);
+        
+        return savedParcel;
     }
+
 }
