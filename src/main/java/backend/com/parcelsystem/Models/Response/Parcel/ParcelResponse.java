@@ -64,6 +64,7 @@ public class ParcelResponse {
         this.sendExpiry = sendExpiry;
         this.dateCreated = dateCreated;
         this.dateUpdated = dateUpdated;
+        this.sendDateDriver = sendDateDriver;
     }
     
     

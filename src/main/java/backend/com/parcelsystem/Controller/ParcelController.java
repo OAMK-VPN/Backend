@@ -131,7 +131,7 @@ public class ParcelController {
     public ResponseEntity<List<ParcelResponse>> getAllParcelsGeneratedByRobot() {
         List<Parcel> parcels = parcelService.generateParcelsAndSendToDriversByRobot();
         List<ParcelResponse> res = parcels.stream()
-        .map(parcel -> parcelMapper.mapParcelToResponseForReceiver(parcel))
+        .map(parcel -> parcelMapper.mapParcelToResponseForDriverApp(parcel))
         .collect(Collectors.toList());
         return new ResponseEntity<>(res, HttpStatus.OK);
     }
