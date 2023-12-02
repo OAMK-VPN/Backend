@@ -6,6 +6,11 @@ import java.util.Arrays;
 import java.util.Optional;
 import java.util.UUID;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.URL;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -27,6 +32,7 @@ import backend.com.parcelsystem.Repository.ReceiverRepos;
 import backend.com.parcelsystem.Repository.SenderRepos;
 import backend.com.parcelsystem.Repository.UserRepos;
 import backend.com.parcelsystem.Utils.SampleGenerator;
+import backend.com.parcelsystem.Utils.BulkUsersGenerator;
 
 @SpringBootApplication
 public class ParcelsystemApplication {
@@ -51,7 +57,15 @@ public class ParcelsystemApplication {
 					"00770");
 
 			Users robot = sampleGenerator.generateUser("robot", "robot@gmail.com", "robot", "HELSINKI", "kalteentie 2",
-					"00770");		
+					"00770");	
+					
+			//Quan asked to add around 20 random users to the database. After being run, the users' passwords are stored in SignUpJsonData.json
+			FileWriter fileWriter = new FileWriter("SignUpJsonData.json");
+			fileWriter.write("");
+			fileWriter.flush();
+			fileWriter.close();
+	        BulkUsersGenerator.bulkUserSignUp(20); 
+			
 			
 			Driver robotdriver = new Driver(robot);
 			driverRepos.findByUser(robot).orElseGet(() -> driverRepos.save(robotdriver));
