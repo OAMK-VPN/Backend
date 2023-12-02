@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import backend.com.parcelsystem.Mapper.NotificationMapper;
-
+import backend.com.parcelsystem.Models.Notification;
 import backend.com.parcelsystem.Models.Receiver;
 import backend.com.parcelsystem.Models.Response.NotificationResponse;
 
@@ -35,15 +35,37 @@ public class NotificationController {
     @GetMapping("/users/notification_status")
     public ResponseEntity<NotificationResponse> getNotificationStatus() {
         Receiver receiver = receiverService.getByAuthenticatedUser();
-        NotificationResponse res = notificationMapper.mapNotificationToResponse(notificationRepos.findByReceiver(receiver));
+        NotificationResponse res;
+
+        if (notificationRepos.findByReceiver(receiver)==null) {
+            Notification nullNotification = new Notification(null,null,null,true,null,null);
+            res = notificationMapper.mapNotificationToResponse(nullNotification);
+        }
+        else{
+            res = notificationMapper.mapNotificationToResponse(notificationRepos.findByReceiver(receiver));}
+
         return new ResponseEntity<NotificationResponse>(res, HttpStatus.OK);
     }
 
     @PutMapping("/users/notification_status")
     public ResponseEntity<NotificationResponse> updateNotificationStatus() {
-        notificationService.switchNotificationStatus();
+        /* notificationService.switchNotificationStatus();
         Receiver receiver = receiverService.getByAuthenticatedUser();
-        NotificationResponse res = notificationMapper.mapNotificationToResponse(notificationRepos.findByReceiver(receiver));
+        NotificationResponse res = notificationMapper.mapNotificationToResponse(notificationRepos.findByReceiver(receiver)); */
+        
+        Receiver receiver = receiverService.getByAuthenticatedUser();
+        NotificationResponse res;
+
+        if (notificationRepos.findByReceiver(receiver)==null) {
+            Notification nullNotification = new Notification(null,null,null,true,null,null);
+            res = notificationMapper.mapNotificationToResponse(nullNotification);
+        }
+        else{
+            res = notificationMapper.mapNotificationToResponse(notificationRepos.findByReceiver(receiver));
+            notificationService.switchNotificationStatus();
+            res = notificationMapper.mapNotificationToResponse(notificationRepos.findByReceiver(receiver));
+        } 
+
         return new ResponseEntity<NotificationResponse>(res, HttpStatus.OK);
     }
     

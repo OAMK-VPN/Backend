@@ -49,4 +49,12 @@ public class Notification {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "date_updated", nullable = false)
     private LocalDateTime dateUpdated;
+
+    public Notification(Receiver receiver, Sender sender, Driver driver, boolean isRead, LocalDateTime dateCreated, LocalDateTime dateUpdated) {
+        this.receiver = receiver;
+        this.isRead = isRead;
+        this.driver = driver;
+        this.dateCreated = dateCreated;
+        this.dateUpdated = dateUpdated;
+    }
 }
