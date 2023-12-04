@@ -90,7 +90,7 @@ public class ParcelController {
             @RequestBody SendLockerCodeRequest request) {
         Parcel parcel = parcelService.dropOffParcelIntoCabinet(lockerId, request.getCode());
         Boolean isOpen = parcel != null ? true : false;
-        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, isOpen);
+        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, parcel.getCabinet().getNum(), isOpen);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -98,9 +98,8 @@ public class ParcelController {
     @PutMapping("/public/pick-up/locker/{lockerId}/code/")
     public ResponseEntity<SendLockerCodeResponse> pickedUpParcelByReceiver(@PathVariable Long lockerId, @RequestBody SendLockerCodeRequest request) {
         System.out.println("pick-up parcel");
-        Parcel parcel = parcelService.pickedUpParcelByReceiver(lockerId, request.getCode());
-        Boolean isOpen = parcel != null ? true : false;
-        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, isOpen);
+        SendLockerCodeResponse response = parcelService.pickedUpParcelByReceiver(lockerId, request.getCode());
+       
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
