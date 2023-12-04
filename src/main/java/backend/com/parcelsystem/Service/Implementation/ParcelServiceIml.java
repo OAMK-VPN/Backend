@@ -25,6 +25,7 @@ import backend.com.parcelsystem.Models.Sender;
 import backend.com.parcelsystem.Models.Users;
 import backend.com.parcelsystem.Models.Enums.ParcelStatus;
 import backend.com.parcelsystem.Models.Request.ParcelRequest;
+import backend.com.parcelsystem.Models.Response.Locker.SendLockerCodeResponse;
 import backend.com.parcelsystem.Repository.ParcelRepos;
 import backend.com.parcelsystem.Repository.SenderRepos;
 import backend.com.parcelsystem.Service.CabinetService;
@@ -171,7 +172,7 @@ public class ParcelServiceIml implements ParcelService {
 
 
     @Override
-    public Parcel pickedUpParcelByReceiver(Long lockerId, String code) {
+    public SendLockerCodeResponse pickedUpParcelByReceiver(Long lockerId, String code) {
         // find the cabinet of locker and code. then update the cabinet code and filled status
         Cabinet cabinet = cabinetService.checkAndUpdateCodeByLockerAndCode(lockerId, code);
 
@@ -199,7 +200,11 @@ public class ParcelServiceIml implements ParcelService {
         // TODOS ->  send to notification to the receiver (note -> exclude the code from the notification for receiver) 
         // TODOS ->  send to notification to the sender (note -> exclude the code from the notification for receiver) 
 
-        return parcel;
+        // return parcel;
+
+        Boolean isOpen = parcel != null ? true : false;
+        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, cabinet.getNum(), isOpen);
+        return response;
     }
 
    

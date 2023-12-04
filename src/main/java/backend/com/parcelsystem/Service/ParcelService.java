@@ -7,6 +7,7 @@ import backend.com.parcelsystem.Models.Driver;
 import backend.com.parcelsystem.Models.Parcel;
 import backend.com.parcelsystem.Models.Enums.ParcelStatus;
 import backend.com.parcelsystem.Models.Request.ParcelRequest;
+import backend.com.parcelsystem.Models.Response.Locker.SendLockerCodeResponse;
 
 public interface ParcelService {
     List<Parcel> getAllByAuthReceiver();
@@ -25,7 +26,7 @@ public interface ParcelService {
 
     Parcel dropOffParcelIntoCabinet(Long lockerId, String code);
 
-    Parcel pickedUpParcelByReceiver(Long lockerId, String code);
+    SendLockerCodeResponse pickedUpParcelByReceiver(Long lockerId, String code);
 
     Parcel assignParcelToNewCabinet(Parcel parcel);
 
