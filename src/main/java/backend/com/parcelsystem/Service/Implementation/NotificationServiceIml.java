@@ -28,12 +28,18 @@ public class NotificationServiceIml implements NotificationService {
 
     public void saveNotification(Parcel parcel) {
         if (!notificationRepos.existsByReceiver(parcel.getReceiver()) ) {
-        Notification notification = new Notification();
-        notification.setReceiver(parcel.getReceiver());
-        notification.setRead(true);
-        notification.setDateCreated(parcel.getDateCreated());
-        notification.setDateUpdated(parcel.getDateUpdated());
-        notificationRepos.save(notification);
+            Notification notification = new Notification();
+            notification.setReceiver(parcel.getReceiver());
+            notification.setRead(false);
+            notification.setDateCreated(parcel.getDateCreated());
+            notification.setDateUpdated(parcel.getDateUpdated());
+            notificationRepos.save(notification);
+        } else {
+            Notification notification = notificationRepos.findByReceiver(parcel.getReceiver());
+            notification.setRead(false);
+            notification.setDateCreated(parcel.getDateCreated());
+            notification.setDateUpdated(parcel.getDateUpdated());
+            notificationRepos.save(notification);
         }
 
         
@@ -42,7 +48,7 @@ public class NotificationServiceIml implements NotificationService {
     public void updateNotificationStatusWhenDriverDropOff(Parcel parcel) {
         
         Notification notification = notificationRepos.findByReceiver(parcel.getReceiver());
-        notification.setRead(false);
+        notification.setRead(!notification.isRead());
         notificationRepos.save(notification);
     }
 
@@ -50,8 +56,8 @@ public class NotificationServiceIml implements NotificationService {
     public void switchNotificationStatus(){
         Receiver receiver= receiverService.getByAuthenticatedUser();
         Notification notification = notificationRepos.findByReceiver(receiver);
-        if (notification.isRead()) notification.setRead(false);
-        else notification.setRead(true);
+        if (notification.isRead()) notification.setRead(!notification.isRead());
+        else notification.setRead(!notification.isRead());
         notificationRepos.save(notification);
 
     }
@@ -60,7 +66,7 @@ public class NotificationServiceIml implements NotificationService {
     public void setNotificationAsRead(){
         Receiver receiver= receiverService.getByAuthenticatedUser();
         Notification notification = notificationRepos.findByReceiver(receiver);
-        notification.setRead(true);
+        notification.setRead(!notification.isRead());
         notificationRepos.save(notification);
 
     }

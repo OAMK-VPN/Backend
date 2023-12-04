@@ -14,6 +14,9 @@ public class NotificationMapper {
     ModelMapper modelMapper;
 
     public NotificationResponse mapNotificationToResponse(Notification notification) {
+      if (notification == null) {
+        return null;
+      }
       NotificationResponse res = modelMapper.map(notification, NotificationResponse.class);
       return res;
     }
