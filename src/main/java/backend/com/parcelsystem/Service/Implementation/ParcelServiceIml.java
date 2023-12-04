@@ -128,7 +128,7 @@ public class ParcelServiceIml implements ParcelService {
     }
 
      @Override
-    public Parcel dropOffParcelIntoCabinet(Long lockerId, String code) {
+    public SendLockerCodeResponse dropOffParcelIntoCabinet(Long lockerId, String code) {
         // find the cabinet of locker and code. then update the cabinet code and filled status
         Cabinet cabinet = cabinetService.checkAndUpdateCodeByLockerAndCode(lockerId, code);
 
@@ -167,11 +167,14 @@ public class ParcelServiceIml implements ParcelService {
 
         // parcel = parcelRepository.save(parcel);
 
-        notificationService.sendNotification(parcel);
-        
-          
+        if(parcel != null) {
+              notificationService.sendNotification(parcel);
+        }
 
-        return parcel;
+        Boolean isOpen = parcel != null ? true : false;
+        SendLockerCodeResponse response =  new SendLockerCodeResponse(lockerId, cabinet != null ? cabinet.getNum() : -1, isOpen);
+        System.out.println(response);
+        return response;
     }
 
 
@@ -202,13 +205,16 @@ public class ParcelServiceIml implements ParcelService {
         // update the cabinet, set empty status by true, set isFilled by false
         cabinetService.updateCabinetAfterBeingPickedupOrderDropOff(cabinet, true, false);
 
-        
-        notificationService.sendNotification(parcel);
+        if(cabinet != null) {
+            notificationService.sendNotification(parcel);
+        }
+     
 
         // return parcel;
 
-        Boolean isOpen = parcel != null ? true : false;
-        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, cabinet.getNum(), isOpen);
+       Boolean isOpen = parcel != null ? true : false;
+         SendLockerCodeResponse response =  new SendLockerCodeResponse(lockerId, cabinet != null ? cabinet.getNum() : -1, isOpen);
+        System.out.println(response);
         return response;
     }
 

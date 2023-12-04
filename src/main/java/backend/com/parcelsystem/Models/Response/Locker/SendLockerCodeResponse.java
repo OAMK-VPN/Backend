@@ -15,4 +15,18 @@ public class SendLockerCodeResponse {
   
   @JsonProperty("isOpen")
   private boolean isOpen;
+
+  // @Override
+  // public String toString() {
+  //   return "SendLockerCodeResponse [lockerId=" + lockerId + ", num=" + num + ", isOpen=" + isOpen + "]";
+  // }
+
+  // public SendLockerCodeResponse(Long lockerId, boolean isOpen) {
+  //   this.lockerId = lockerId;
+  //   this.isOpen = isOpen;
+  // }
+
+
+  
+  
 }
