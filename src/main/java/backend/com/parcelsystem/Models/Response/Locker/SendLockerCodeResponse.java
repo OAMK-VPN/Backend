@@ -10,6 +10,8 @@ import lombok.AllArgsConstructor;
 @Data
 public class SendLockerCodeResponse {
   private Long lockerId;
+
+  private int num;
   
   @JsonProperty("isOpen")
   private boolean isOpen;

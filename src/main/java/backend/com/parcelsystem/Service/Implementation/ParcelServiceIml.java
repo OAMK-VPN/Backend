@@ -25,6 +25,7 @@ import backend.com.parcelsystem.Models.Sender;
 import backend.com.parcelsystem.Models.Users;
 import backend.com.parcelsystem.Models.Enums.ParcelStatus;
 import backend.com.parcelsystem.Models.Request.ParcelRequest;
+import backend.com.parcelsystem.Models.Response.Locker.SendLockerCodeResponse;
 import backend.com.parcelsystem.Repository.ParcelRepos;
 import backend.com.parcelsystem.Repository.SenderRepos;
 import backend.com.parcelsystem.Service.CabinetService;
@@ -176,7 +177,7 @@ public class ParcelServiceIml implements ParcelService {
 
 
     @Override
-    public Parcel pickedUpParcelByReceiver(Long lockerId, String code) {
+    public SendLockerCodeResponse pickedUpParcelByReceiver(Long lockerId, String code) {
         // find the cabinet of locker and code. then update the cabinet code and filled status
         Cabinet cabinet = cabinetService.checkAndUpdateCodeByLockerAndCode(lockerId, code);
 
@@ -204,7 +205,11 @@ public class ParcelServiceIml implements ParcelService {
         
         notificationService.sendNotification(parcel);
 
-        return parcel;
+        // return parcel;
+
+        Boolean isOpen = parcel != null ? true : false;
+        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, cabinet.getNum(), isOpen);
+        return response;
     }
 
    
@@ -279,7 +284,7 @@ public List<Parcel> assignAllParcelsToDrivers() {
             int numberOfAssignedParcels = equalNumber + (leftNumber > 0 ? 1 : 0);
             leftNumber = leftNumber > 0 ? leftNumber-- : 0;
 
-            for (int i = 0; i < numberOfAssignedParcels; i++) {
+            for (int i = 0; i < numberOfAssignedParcels && indexNumber < parcels.size(); i++) {
                 Parcel parcel = parcels.get(indexNumber);
                 indexNumber++;
                 
@@ -438,10 +443,12 @@ public List<Parcel> assignAllParcelsToDrivers() {
         parcel.setWeigh(emptyCabinet.getWeigh());
         parcel.setReceiveDateDriver(LocalDateTime.now());
         parcel.setSender(robotSender);
+        parcel.setSendDateSender(LocalDateTime.now());
 
 
         // Save the parcel to the database
         Parcel savedParcel = parcelRepository.save(parcel);
+        System.out.println(parcel);
         
         return savedParcel;
     }
