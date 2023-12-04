@@ -90,7 +90,7 @@ public class ParcelController {
             @RequestBody SendLockerCodeRequest request) {
         Parcel parcel = parcelService.dropOffParcelIntoCabinet(lockerId, request.getCode());
         Boolean isOpen = parcel != null ? true : false;
-        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, isOpen);
+        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, parcel.getCabinet().getNum(), isOpen);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
@@ -100,7 +100,7 @@ public class ParcelController {
         System.out.println("pick-up parcel");
         Parcel parcel = parcelService.pickedUpParcelByReceiver(lockerId, request.getCode());
         Boolean isOpen = parcel != null ? true : false;
-        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, isOpen);
+        SendLockerCodeResponse response = new SendLockerCodeResponse(lockerId, parcel.getCabinet().getNum(), isOpen);
         
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
