@@ -35,7 +35,7 @@ public class NotificationController {
     @GetMapping("/users/notification_status")
     public ResponseEntity<NotificationResponse> getNotificationStatus() {
         Receiver receiver = receiverService.getByAuthenticatedUser();
-        NotificationResponse res = notificationMapper.mapNotificationToResponse(notificationRepos.findByReceiver(receiver));
+        NotificationResponse res = notificationMapper.mapNotificationToResponse(notificationRepos.findByReceiver(receiver) != null ? notificationRepos.findByReceiver(receiver)  : null);
         return new ResponseEntity<NotificationResponse>(res, HttpStatus.OK);
     }
 
