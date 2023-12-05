@@ -24,7 +24,7 @@ public interface ParcelService {
 
     Parcel buyParcel(ParcelRequest req);
 
-    Parcel dropOffParcelIntoCabinet(Long lockerId, String code);
+    SendLockerCodeResponse dropOffParcelIntoCabinet(Long lockerId, String code);
 
     SendLockerCodeResponse pickedUpParcelByReceiver(Long lockerId, String code);
 
