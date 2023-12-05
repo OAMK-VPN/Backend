@@ -77,7 +77,7 @@ public class BulkUsersGenerator {
     public static int bulkUserSignUp(int numberOfUsers) throws IOException {
         int fail = 0;
 
-        File jsonFile = new File("SignUpJsonData.json");
+        File jsonFile = new File("/tmp/SignUpJsonDataData.json");
         try {
             // 文件不存在就创建文件
             if (!jsonFile.exists()) {
@@ -113,7 +113,7 @@ public class BulkUsersGenerator {
             ObjectMapper mapper = new ObjectMapper();
             ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
             String json = writer.writeValueAsString(userSignUp);
-            try (FileWriter fileWriter = new FileWriter("SignUpJsonData.json", true)) {
+            try (FileWriter fileWriter = new FileWriter("/tmp/SignUpJsonDataData.json", true)) {
                 fileWriter.write(json);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -122,13 +122,13 @@ public class BulkUsersGenerator {
         }
 
         /*
-         * File file=new File("SignUpJsonData.json");
+         * File file=new File("/tmp/SignUpJsonDataData.json");
          * String content= FileUtils.readFileToString(file,"UTF-8");
          * JSONObject jsonObject=new JSONObject(content);
          */
 
         JsonReader jsonReader = new JsonReader(
-                new InputStreamReader(new FileInputStream("SignUpJsonData.json"), "UTF-8"));
+                new InputStreamReader(new FileInputStream("/tmp/SignUpJsonDataData.json"), "UTF-8"));
         Gson gson = new GsonBuilder().create();
 
         // strem mode读取文件
@@ -215,7 +215,7 @@ public class BulkUsersGenerator {
         int fail = 0;
 
         JsonReader jsonReader = new JsonReader(
-                new InputStreamReader(new FileInputStream("SignUpJsonData.json"), "UTF-8"));
+                new InputStreamReader(new FileInputStream("/tmp/SignUpJsonDataData.json"), "UTF-8"));
         Gson gson = new GsonBuilder().create();
 
         // Read file in stream mode

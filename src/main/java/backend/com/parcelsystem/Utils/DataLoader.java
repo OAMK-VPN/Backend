@@ -18,9 +18,12 @@ import backend.com.parcelsystem.Repository.LockerRepos;
 import backend.com.parcelsystem.Service.CodeService;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Objects;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -39,15 +42,30 @@ public class DataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Read JSON data from file
-        ObjectMapper objectMapper = new ObjectMapper();
-        File locationFilePath = ResourceUtils.getFile("classpath:PostnordLocation.json");
+        try {
 
-        List<Locker> parcelLockers = objectMapper.readValue(locationFilePath,
-                objectMapper.getTypeFactory().constructCollectionType(List.class, Locker.class));
+            InputStream inputStream = Objects.requireNonNull(
+                    DataLoader.class.getClassLoader().getResourceAsStream("/PostNordLocation.json"),
+                    "PostNordLocation.json not found in classpath"
+            );
 
-        // Save data to the database
-        parcelLockerRepository.saveAll(parcelLockers);
-        generateAndSaveRandomCabinets();
+            ObjectMapper objectMapper = new ObjectMapper();
+            List<Locker> parcelLockers = objectMapper.readValue(inputStream,  objectMapper.getTypeFactory().constructCollectionType(List.class, Locker.class));
+
+            // Save data to the database
+            parcelLockerRepository.saveAll(parcelLockers);
+            generateAndSaveRandomCabinets();
+
+            // Close the InputStream when done
+            inputStream.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        
+        }
+
+
+
 
     }
 

@@ -59,8 +59,8 @@ public class ParcelsystemApplication {
 			Users robot = sampleGenerator.generateUser("robot", "robot@gmail.com", "robot", "HELSINKI", "kalteentie 2",
 					"00770");	
 					
-			//Quan asked to add around 20 random users to the database. After being run, the users' passwords are stored in SignUpJsonData.json
-			FileWriter fileWriter = new FileWriter("SignUpJsonData.json");
+			//Quan asked to add around 20 random users to the database. After being run, the users' passwords are stored in /tmp/SignUpJsonDataData.json
+			FileWriter fileWriter = new FileWriter("/tmp/SignUpJsonDataData.json");
 			fileWriter.write("");
 			fileWriter.flush();
 			fileWriter.close();
