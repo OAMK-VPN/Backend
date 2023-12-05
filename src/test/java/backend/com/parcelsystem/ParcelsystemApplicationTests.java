@@ -24,7 +24,7 @@ public class ParcelsystemApplicationTests {
     @Test
     public void usersRegisterAndLoginTest() throws JSONException, IOException {
 
-        FileWriter fileWriter = new FileWriter("SignUpJsonData.json");
+        FileWriter fileWriter = new FileWriter("/tmp/SignUpJsonDataData.json");
         fileWriter.write("");
         fileWriter.flush();
         fileWriter.close();
