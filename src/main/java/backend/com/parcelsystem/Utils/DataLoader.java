@@ -38,6 +38,8 @@ public class DataLoader implements CommandLineRunner {
     CabinetRepos cabinetRepos;
     @Autowired
     CityRepos cityRepos;
+    @Autowired
+    LockerRepos lockerRepos;
 
     @Override
     public void run(String... args) throws Exception {
@@ -53,8 +55,9 @@ public class DataLoader implements CommandLineRunner {
             List<Locker> parcelLockers = objectMapper.readValue(inputStream,  objectMapper.getTypeFactory().constructCollectionType(List.class, Locker.class));
 
             // Save data to the database
+            if (!lockerRepos.existsById(1L)) {
             parcelLockerRepository.saveAll(parcelLockers);
-            generateAndSaveRandomCabinets();
+            generateAndSaveRandomCabinets();}
 
             // Close the InputStream when done
             inputStream.close();

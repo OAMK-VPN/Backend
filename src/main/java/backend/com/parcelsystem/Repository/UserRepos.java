@@ -9,4 +9,5 @@ import  backend.com.parcelsystem.Models.Users;
 public interface UserRepos extends JpaRepository<Users, Long> {
     Optional<Users> findByUsername(String username);
     Optional<Users> findByEmail(String email);
+    boolean existsById(Long id);
 }

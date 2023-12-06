@@ -10,4 +10,5 @@ import backend.com.parcelsystem.Models.Locker;
 public interface LockerRepos extends JpaRepository<Locker, Long>{
     List<Locker> findByZipcode(String zipcode);
     List<Locker> findByCity(String city);
+    boolean existById(Long id);
 }

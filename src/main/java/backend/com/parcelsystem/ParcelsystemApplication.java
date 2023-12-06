@@ -64,6 +64,7 @@ public class ParcelsystemApplication {
 			fileWriter.write("");
 			fileWriter.flush();
 			fileWriter.close();
+			if (!userRepos.existsById(20L))
 	        BulkUsersGenerator.bulkUserSignUp(20); 
 			
 			
