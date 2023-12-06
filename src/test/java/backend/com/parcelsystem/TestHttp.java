@@ -45,7 +45,7 @@ import java.net.URL;
 
 public class TestHttp {
 
-    public static final String ADD_URL = "http://localhost:8080/api/users/signup";
+    public static final String ADD_URL = "http://20231206t161041-dot-reference-hold-399315.ew.r.appspot.com/api/users/signup";
 
     public static String generateRandomPassword(int length) {
         String capitalLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -80,7 +80,7 @@ public class TestHttp {
     public static int testUserSignUp(int numberOfUsers) throws JSONException, IOException {
         int fail = 0;
 
-        File jsonFile = new File("/tmp/SignUpJsonDataData.json");
+        File jsonFile = new File("SignUpJsonDataData.json");
         try {
             // 文件不存在就创建文件
             if (!jsonFile.exists()) {
@@ -116,7 +116,7 @@ public class TestHttp {
             ObjectMapper mapper = new ObjectMapper();
             ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
             String json = writer.writeValueAsString(userSignUp);
-            try (FileWriter fileWriter = new FileWriter("/tmp/SignUpJsonDataData.json", true)) {
+            try (FileWriter fileWriter = new FileWriter("SignUpJsonDataData.json", true)) {
                 fileWriter.write(json);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -125,13 +125,13 @@ public class TestHttp {
         }
 
         /*
-         * File file=new File("/tmp/SignUpJsonDataData.json");
+         * File file=new File("SignUpJsonDataData.json");
          * String content= FileUtils.readFileToString(file,"UTF-8");
          * JSONObject jsonObject=new JSONObject(content);
          */
 
         JsonReader jsonReader = new JsonReader(
-                new InputStreamReader(new FileInputStream("/tmp/SignUpJsonDataData.json"), "UTF-8"));
+                new InputStreamReader(new FileInputStream("SignUpJsonDataData.json"), "UTF-8"));
         Gson gson = new GsonBuilder().create();
 
         // strem mode读取文件
@@ -190,7 +190,7 @@ public class TestHttp {
 
                 ObjectMapper objectMapper = new ObjectMapper();
                 String jsonString = objectMapper.writeValueAsString(userSignUp);
-                fail = makeHttpURLConnection("http://localhost:8080/api/users/signup", "POST", jsonString);
+                fail = makeHttpURLConnection("http://20231206t161041-dot-reference-hold-399315.ew.r.appspot.com/api/users/signup", "POST", jsonString);
             } // end of if
             i++;
             
@@ -218,7 +218,7 @@ public class TestHttp {
         int fail = 0;
 
         JsonReader jsonReader = new JsonReader(
-                new InputStreamReader(new FileInputStream("/tmp/SignUpJsonDataData.json"), "UTF-8"));
+                new InputStreamReader(new FileInputStream("SignUpJsonDataData.json"), "UTF-8"));
         Gson gson = new GsonBuilder().create();
 
         // Read file in stream mode
@@ -253,7 +253,7 @@ public class TestHttp {
                 if (jsonReader.peek() != JsonToken.END_DOCUMENT)
                     jsonReader.beginObject();
                 String userSignIn = "{\"email\":\"" + email + "\",\"password\":\"" + password + "\"}";
-                makeHttpURLConnection("http://localhost:8080/api/users/signIn", "PUT", userSignIn);
+                fail = makeHttpURLConnection("http://20231206t161041-dot-reference-hold-399315.ew.r.appspot.com/api/users/signIn", "PUT", userSignIn);
 
             } // end of if
             i++;
@@ -320,7 +320,7 @@ public class TestHttp {
     }
 
     public static void main(String[] args) throws JSONException, IOException {
-        FileWriter fileWriter = new FileWriter("/tmp/SignUpJsonDataData.json");
+        FileWriter fileWriter = new FileWriter("SignUpJsonDataData.json");
         fileWriter.write("");
         fileWriter.flush();
         fileWriter.close();

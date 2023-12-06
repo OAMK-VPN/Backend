@@ -24,12 +24,12 @@ public class ParcelsystemApplicationTests {
     @Test
     public void usersRegisterAndLoginTest() throws JSONException, IOException {
 
-        FileWriter fileWriter = new FileWriter("/tmp/SignUpJsonDataData.json");
+        FileWriter fileWriter = new FileWriter("SignUpJsonDataData.json");
         fileWriter.write("");
         fileWriter.flush();
         fileWriter.close();
 
-        Assert.assertEquals(0, TestHttp.testUserSignUp(100)); 
+        Assert.assertEquals(0, TestHttp.testUserSignUp(20)); 
         Assert.assertEquals(0, TestHttp.testUserLogin()); 
 
 
