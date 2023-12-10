@@ -1,0 +1,9 @@
+runtime: java17
+automatic_scaling:
+  target_cpu_utilization: 0.5
+  max_instances: 3
+  min_instances: 3
+  min_idle_instances: 3
+  min_pending_latency: automatic
+  max_pending_latency: automatic
+  max_concurrent_requests: 50

@@ -1,6 +1,6 @@
 cron:
 - description: "daily job"
-  url: /robot-generating
+  url: /api/parcels/robot-generating
   schedule: every 24 hours 
   timezone: Europe/Tallinn
 

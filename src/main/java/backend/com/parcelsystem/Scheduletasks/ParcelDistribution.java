@@ -23,7 +23,7 @@ public class ParcelDistribution {
         "Fixed rate task - " + System.currentTimeMillis() / 1000);
     } */
 
-    @Scheduled(cron = "0 0 3 * * *") // Run at 3 am every day
+    @Scheduled(cron = "0 1 10 * * ?", zone = "Europe/Tallinn") 
     public void generateParcelsJob() {
         parcelService.CheckAllSendExpiredParcels();
         parcelService.CheckAllPickupExpiredParcels();

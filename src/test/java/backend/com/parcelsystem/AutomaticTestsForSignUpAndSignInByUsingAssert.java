@@ -5,7 +5,7 @@ import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Test;
 
-import backend.com.parcelsystem.TestHttp;
+import backend.com.parcelsystem.AutomaticTestsForSignUpAndSignIn;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.when;
 
 
 
-public class ParcelsystemApplicationTests {
+public class AutomaticTestsForSignUpAndSignInByUsingAssert {
 
     @Test
     public void usersRegisterAndLoginTest() throws JSONException, IOException {
@@ -29,8 +29,8 @@ public class ParcelsystemApplicationTests {
         fileWriter.flush();
         fileWriter.close();
 
-        Assert.assertEquals(0, TestHttp.testUserSignUp(20)); 
-        Assert.assertEquals(0, TestHttp.testUserLogin()); 
+        Assert.assertEquals(0, AutomaticTestsForSignUpAndSignIn.testUserSignUp(20)); 
+        Assert.assertEquals(0, AutomaticTestsForSignUpAndSignIn.testUserLogin()); 
 
 
 
@@ -39,7 +39,7 @@ public class ParcelsystemApplicationTests {
     }
 
     public static void main(String[] args) throws JSONException, IOException {
-        ParcelsystemApplicationTests tests = new ParcelsystemApplicationTests();
+        AutomaticTestsForSignUpAndSignInByUsingAssert tests = new AutomaticTestsForSignUpAndSignInByUsingAssert();
         tests.usersRegisterAndLoginTest();
     }
 }

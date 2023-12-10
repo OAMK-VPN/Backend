@@ -43,7 +43,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 
-public class TestHttp {
+public class AutomaticTestsForSignUpAndSignIn {
 
     public static final String ADD_URL = "http://20231206t161041-dot-reference-hold-399315.ew.r.appspot.com/api/users/signup";
 
@@ -324,8 +324,8 @@ public class TestHttp {
         fileWriter.write("");
         fileWriter.flush();
         fileWriter.close();
-        testUserSignUp(100);
-        testUserLogin();
+        testUserSignUp(100);   //specify the number of users you want to generate
+        testUserLogin();  // Sign in with the all users generated in the previous step
     }
 
 }
