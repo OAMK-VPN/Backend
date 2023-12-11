@@ -1,59 +1,240 @@
 [
-    {
-      "name": "Postnord Lähiboksi Prisma Limingantulli",
-      "address": "Nuottasaarentie 1",
-      "zipcode": "90400",
-      "city": "OULU",
-      "totalCabinets": 20
-    },
-    {
-      "name": "Postnord Automaatti K-market Värttö",
-      "address": "Kurkelantie 2B",
-      "zipcode": "90230",
-      "city": "OULU",
-      "totalCabinets": 20
-    },
-    {
-      "name": "Postnord K-market Värttö",
-      "address": "Kurkelantie 2",
-      "zipcode": "90230",
-      "city": "OULU",
-      "totalCabinets": 20
-    },
-    {
-      "name": "Postnord Lähiboksi Kitimenpolku 21",
-      "address": "Kitimenpolku 21",
-      "zipcode": "90500",
-      "city": "OULU",
-      "totalCabinets": 20
-    },
-    {
-      "name": "Postnord Automaatti K-market Masurkka",
-      "address": "Käpyläntie 8",
-      "zipcode": "00600",
-      "city": "HELSINKI",
-      "totalCabinets": 20
-    },
-    {
-        "name": "Postnord R-kioski Käpylä",
-        "address": "Pohjolankatu 38",
-        "zipcode": "00610",
-        "city": "HELSINKI",
-        "totalCabinets": 20
-    },
-    {
-        "name": "Postnord Automaatti Alepa Koskela",
-        "address": "Antti Korpin Tie 3",
-        "zipcode": "00600",
-        "city": "HELSINKI",
-        "totalCabinets": 20
-    },
-    {
-        "name": "Postnord Automaatti K-supermarket Mustapekka",
-        "address": "Mäkitorpantie 1",
-        "zipcode": "00620",
-        "city": "HELSINKI",
-        "totalCabinets": 20
-    }
-  
+  {
+  "name": "Postnord Automaatti K-supermarket Pekuri",
+  "address": "Kauppurienkatu 10",
+  "zipcode": "90100",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord R-kioski Oulu Keskusta Isokatu",
+  "address": "Isokatu 61",
+  "zipcode": "90100",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord K-market Torinranta",
+  "address": "Saaristonkatu 2",
+  "zipcode": "90100",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Lähiboksi Mannenkatu 2",
+  "address": "Mannenkatu 2",
+  "zipcode": "90130",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti Sale Puistolinna",
+  "address": "Isokatu 87",
+  "zipcode": "90120",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti Prisma Raksila Oulu",
+  "address": "Tehtaankatu 3",
+  "zipcode": "90130",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Lähiboksi Sale Raksila",
+  "address": "Tehtaankatu 1",
+  "zipcode": "90130",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord K-citymarket Oulu Raksila",
+  "address": "Tehtaankatu 5",
+  "zipcode": "90130",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord K-market Valjaspuisto",
+  "address": "Limingantie 8",
+  "zipcode": "90400",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti Sale Etelätulli Oulu",
+  "address": "Ilmarinkatu 16",
+  "zipcode": "90400",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Lähiboksi Sale Intiö",
+  "address": "Kenttätie 9",
+  "zipcode": "90130",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti Sale Intiö Oulu",
+  "address": "Kenttätie 9",
+  "zipcode": "90130",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord K-market Tuira",
+  "address": "Valtatie 61",
+  "zipcode": "90500",
+  "city": "OULU",
+  "totalCabinets": 20
+},
+{
+    "name": "Postnord Automaatti Lidl Arabia",
+    "address": "Hämeentie 109",
+    "zipcode": "00560",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+    "name": "Postnord Automaatti S-market Maunula",
+    "address": "Metsäpurontie 2",
+    "zipcode": "00630",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+    "name": "Postnord K-supermarket Arabia",
+    "address": "Hämeentie 111",
+    "zipcode": "00560",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+    "name": "Postnord Automaatti Kauppakeskus Arabia",
+    "address": "Hämeentie 111",
+    "zipcode": "00560",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+    "name": "Postnord Automaatti K-supermarket Arabia",
+    "address": "Hämeentie 111",
+    "zipcode": "00560",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+    "name": "Postnord K-market Savela",
+    "address": "Savelantie 11",
+    "zipcode": "00720",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+    "name": "Postnord K-market Pikkusisko",
+    "address": "Yhdyskunnantie 22",
+    "zipcode": "00680",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+    "name": "Postnord K-market Pihlajisto",
+    "address": "Hattelmalantie 2",
+    "zipcode": "00710",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+    "name": "Postnord K-market Pasaati",
+    "address": "Asemapäällikönkatu 3",
+    "zipcode": "00520",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+    "name": "Postnord K-market Mäkelänkatu",
+    "address": "Mäkelänkatu 58",
+    "zipcode": "00510",
+    "city": "HELSINKI",
+    "totalCabinets": 20
+},
+{
+  "name": "Postnord K-market Sture",
+  "address": "Sturenkatu 40",
+  "zipcode": "00550",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti S-market Pukinmäki",
+  "address": "Eskolankaari 2",
+  "zipcode": "00720",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord R-kioski Länsi-pakila",
+  "address": "Pakilantie 56",
+  "zipcode": "00660",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord K-market Pukinmäki",
+  "address": "Eskolantie 2",
+  "zipcode": "00720",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti Kauppakeskus Tripla (krs 4)",
+  "address": "Pasilan Asema-Aukio 1",
+  "zipcode": "00520",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti S-market Pakila",
+  "address": "Pakilantie 61",
+  "zipcode": "00660",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti Kauppakeskus Tripla (krs 1)",
+  "address": "Firdonkatu 2",
+  "zipcode": "00520",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord K-supermarket Tripla",
+  "address": "Firdonkatu 2",
+  "zipcode": "00520",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti Prisma Viikki",
+  "address": "Viikintori 3",
+  "zipcode": "00790",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord Automaatti K-market Pikku Haaga",
+  "address": "Tunnelitie 10",
+  "zipcode": "00320",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+},
+{
+  "name": "Postnord K-market Pikku Haaga",
+  "address": "Tunnelitie 10",
+  "zipcode": "00320",
+  "city": "HELSINKI",
+  "totalCabinets": 20
+}  
 ] 

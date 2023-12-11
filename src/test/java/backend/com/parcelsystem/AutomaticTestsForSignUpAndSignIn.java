@@ -324,7 +324,7 @@ public class AutomaticTestsForSignUpAndSignIn {
         fileWriter.write("");
         fileWriter.flush();
         fileWriter.close();
-        testUserSignUp(100);   //specify the number of users you want to generate
+        testUserSignUp(20);   //specify the number of users you want to generate
         testUserLogin();  // Sign in with the all users generated in the previous step
     }
 
