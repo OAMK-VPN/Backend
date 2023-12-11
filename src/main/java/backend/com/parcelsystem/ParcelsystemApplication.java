@@ -34,6 +34,7 @@ import backend.com.parcelsystem.Repository.UserRepos;
 import backend.com.parcelsystem.Utils.SampleGenerator;
 import backend.com.parcelsystem.Utils.BulkUsersGenerator;
 
+
 @SpringBootApplication
 public class ParcelsystemApplication {
 
@@ -47,15 +48,7 @@ public class ParcelsystemApplication {
 			LockerRepos lockerRepos, CabinetRepos cabinetRepos) {
 		return args -> {
 
-			Users quan = sampleGenerator.generateUser("quan", "quan@gmail.com", "Quan Doan", "OULU", "yliopistokatu 2",
-					"90570");
-			Users Peter = sampleGenerator.generateUser("peter", "peter@gmail.com", "Peter senull00", "OULU", "Tehtaankatu 3",
-					"90130");
-			Users hang = sampleGenerator.generateUser("hang", "hang@gmail.com", "hang", "HELSINKI", "Malminkaari 19",
-					"00700");
-			Users kwang = sampleGenerator.generateUser("kwang", "kwang@gmail.com", "kwang", "HELSINKI", "kalteentie 2",
-					"00770");
-
+			
 			Users robot = sampleGenerator.generateUser("robot", "robot@gmail.com", "robot", "HELSINKI", "kalteentie 2",
 					"00770");	
 					
@@ -72,14 +65,7 @@ public class ParcelsystemApplication {
 			driverRepos.findByUser(robot).orElseGet(() -> driverRepos.save(robotdriver));
 
 
-			Driver Kwangdriver = new Driver(kwang);
-			driverRepos.findByUser(kwang).orElseGet(() -> driverRepos.save(Kwangdriver));
 
-			Sender peterCustomer = new Sender(Peter);
-			senderRepos.findByUser(Peter).orElseGet(() -> senderRepos.save(peterCustomer));
-
-			Receiver hangReceiver = new Receiver(hang);
-			receiverRepos.findByUser(hang).orElseGet(() -> receiverRepos.save(hangReceiver));
 
 			// Parcel parcel = new Parcel(UUID.randomUUID().toString(),
 			// ParcelStatus.IN_DELIVERY, "HELSINKI" ,"Kalteentie 2", "00770", hangReceiver,
