@@ -57,7 +57,7 @@ public class AutomaticTestsForSignUpAndSignIn {
         Random random = new Random();
         char[] password = new char[length];
 
-        // 随机选择一个字符集，并从中随机选择一个字符添加到密码中
+        // select a char randomly and add it to the password
         for (int i = 0; i < length; i++) {
             String charSet = allChars;
             int charSetIndex = random.nextInt(4);
@@ -82,7 +82,7 @@ public class AutomaticTestsForSignUpAndSignIn {
 
         File jsonFile = new File("SignUpJsonDataData.json");
         try {
-            // 文件不存在就创建文件
+            // if the file doesn't exist, it will create one.
             if (!jsonFile.exists()) {
                 jsonFile.createNewFile();
             }
@@ -112,7 +112,7 @@ public class AutomaticTestsForSignUpAndSignIn {
              * fileWriter.close();
              */
 
-            // 下面是第二种写法
+            // Below is the second method
             ObjectMapper mapper = new ObjectMapper();
             ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
             String json = writer.writeValueAsString(userSignUp);
@@ -134,7 +134,7 @@ public class AutomaticTestsForSignUpAndSignIn {
                 new InputStreamReader(new FileInputStream("SignUpJsonDataData.json"), "UTF-8"));
         Gson gson = new GsonBuilder().create();
 
-        // strem mode读取文件
+        // reading files under strem mode
         jsonReader.beginObject();
         jsonReader.setLenient(true);
         String username = null;
@@ -266,7 +266,7 @@ public class AutomaticTestsForSignUpAndSignIn {
         int fail = 0;
 
             try {
-                // 创建连接
+                // create a Http connection 
                 URL url = new URL(urlString);
                 HttpURLConnection connection = (HttpURLConnection) url
                         .openConnection();
@@ -301,7 +301,7 @@ public class AutomaticTestsForSignUpAndSignIn {
                     System.out.println("fail"); fail++;
                 }
                 reader.close();
-                // 断开连接
+                // close the connection
                 connection.disconnect();
             } catch (MalformedURLException e) {
                 // TODO Auto-generated catch block
