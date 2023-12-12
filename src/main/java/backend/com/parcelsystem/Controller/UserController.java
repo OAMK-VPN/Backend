@@ -63,12 +63,14 @@ public class UserController {
     
     @PostMapping("/signup")
     public ResponseEntity<AuthResponse> register(@Valid @RequestBody UserSignUp userSignup) {
+        userSignup.setCity(userSignup.getCity().toUpperCase() );
         return new ResponseEntity<AuthResponse>(userService.saveUser(userSignup, false), HttpStatus.CREATED);
     }
 
      // signup for driver
     @PostMapping("/signup-driver")
     public ResponseEntity<AuthResponse> registerfordriver(@Valid @RequestBody UserSignUp userSignup) {
+        userSignup.setCity(userSignup.getCity().toUpperCase() );
         return new ResponseEntity<AuthResponse>(userService.saveDriver(userSignup), HttpStatus.CREATED);
     }
 
